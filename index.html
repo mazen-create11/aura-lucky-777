@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0B">
+<title>Aura Lucky — Drop 001</title>
+<meta name="description" content="Aura Lucky Drop 001. Ensemble noir brodé 777, édition limitée à 50 pièces numérotées.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230A0A0B'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='24' fill='%23C9A227'%3E777%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/v3/hero-777-black-chrome.webp" as="image" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0B;--panel:#101012;--ivory:#F2EFE6;--gold:#C9A227;--gold-hi:#E4C55B;
+  --gold-low:#6E5A13;--gold-pale:#F2D879;--gold-deep:#3B2D07;--stone:#8A8578;--line:rgba(138,133,120,.22);
+  --ease:cubic-bezier(.16,1,.3,1);--ease-lux:cubic-bezier(.76,0,.24,1);--header-h:96px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--ink);color:var(--ivory);font-family:'Switzer',sans-serif;font-weight:350;overflow-x:clip;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body.cart-open,body.menu-open{overflow:hidden}
+button,input,select{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+fieldset{border:0}
+::selection{background:var(--gold);color:var(--ink)}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.grain{position:fixed;z-index:150;inset:-50%;width:200%;height:200%;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+.progress{position:fixed;z-index:170;left:0;top:0;width:100%;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left}
+.eyebrow{font-family:'Space Grotesk',monospace;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding:0 5vw 38px;border-bottom:1px solid var(--line)}
+.section-head h2{font-family:'Instrument Serif',serif;font-size:clamp(46px,7vw,104px);font-weight:400;line-height:.9;letter-spacing:-.035em}
+.section-head h2 em{font-weight:400;color:var(--gold)}
+.section-head p{max-width:340px;color:var(--stone);font-size:14px;line-height:1.7}
+
+.intro{height:210svh;position:relative;z-index:130;background:var(--ink)}
+.intro-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:
+  radial-gradient(circle at 50% 43%,rgba(242,239,230,.075),transparent 32%),
+  linear-gradient(135deg,#0d0d0e 0%,var(--ink) 48%,#050506 100%);isolation:isolate;perspective:1400px}
+.intro-stage::before{content:"";position:absolute;z-index:1;inset:0;pointer-events:none;opacity:.32;background:
+  linear-gradient(90deg,transparent calc(50% - .5px),rgba(201,162,39,.18) 50%,transparent calc(50% + .5px)),
+  linear-gradient(0deg,transparent calc(50% - .5px),rgba(201,162,39,.12) 50%,transparent calc(50% + .5px))}
+.intro-stage::after{content:"";position:absolute;z-index:4;inset:16px;pointer-events:none;border:1px solid rgba(201,162,39,.12)}
+#explosionCanvas{position:absolute;z-index:3;inset:0;width:100%;height:100%;display:block;will-change:opacity}
+.intro-emblem{position:absolute;z-index:2;left:50%;top:45%;width:min(94vw,1520px);aspect-ratio:4/3;transform:translate(-50%,-50%);pointer-events:none;will-change:transform,opacity,filter}
+.intro-emblem img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.08) brightness(.78);mix-blend-mode:screen}
+.intro-emblem::before{content:"";position:absolute;z-index:-1;left:50%;top:49%;width:76%;height:48%;transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse,rgba(242,239,230,.1),rgba(242,239,230,.02) 42%,transparent 72%);filter:blur(28px)}
+.intro-emblem::after{content:"";position:absolute;inset:0;background:linear-gradient(112deg,transparent 28%,rgba(255,255,255,.72) 47%,rgba(214,216,218,.08) 57%,transparent 72%);
+  mask-image:url("assets/v3/hero-777-black-chrome.webp");mask-position:center;mask-size:contain;mask-repeat:no-repeat;mask-mode:luminance;
+  mix-blend-mode:screen;opacity:.2;transform:translateX(-38%)}
+.webgl-ready .intro-emblem{opacity:0;visibility:hidden}
+.intro-aura{position:absolute;z-index:1;left:50%;top:47%;width:min(82vw,1080px);aspect-ratio:1;transform:translate(-50%,-50%);border:1px solid rgba(201,162,39,.11);border-radius:50%;pointer-events:none}
+.intro-aura::before,.intro-aura::after{content:"";position:absolute;border:1px solid rgba(201,162,39,.09);border-radius:50%;inset:10%}
+.intro-aura::after{inset:27%;box-shadow:0 0 110px rgba(201,162,39,.08)}
+.intro-vignette{position:absolute;z-index:3;inset:0;pointer-events:none;background:
+  radial-gradient(circle at 50% 43%,rgba(242,239,230,.035),rgba(10,10,11,0) 35%),
+  linear-gradient(90deg,rgba(10,10,11,.52),transparent 21%,transparent 79%,rgba(10,10,11,.48)),
+  linear-gradient(180deg,rgba(10,10,11,.16),rgba(10,10,11,0) 48%,rgba(10,10,11,.88))}
+.intro-top{position:absolute;z-index:7;left:3.5vw;right:3.5vw;top:4.2vh;display:flex;align-items:center;justify-content:space-between}
+.intro-brand{font-family:'Space Grotesk',monospace;font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase}
+.intro-edition{font-family:'Space Grotesk',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+.intro-chapter{position:absolute;z-index:7;left:3.5vw;top:50%;display:flex;align-items:center;gap:13px;transform:translateY(-50%) rotate(-90deg);transform-origin:left center;
+  font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--stone)}
+.intro-chapter::before{content:"";width:42px;height:1px;background:var(--gold)}
+.intro-copy{position:absolute;z-index:6;left:3.5vw;right:3.5vw;bottom:4.8vh;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:48px}
+.intro-message{max-width:1500px}
+.intro-kicker{margin-bottom:17px;font-family:'Space Grotesk',monospace;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.intro-copy h1{font-family:'Instrument Serif',serif;font-size:clamp(58px,7.4vw,142px);font-weight:400;line-height:.82;letter-spacing:-.052em}
+.intro-copy h1 span,.intro-copy h1 em{display:block}
+.intro-copy h1 em{color:var(--gold);font-weight:400}
+.intro-meta{min-width:205px;padding-bottom:6px;text-align:right;font-family:'Space Grotesk',monospace;font-size:9px;line-height:1.8;letter-spacing:.17em;text-transform:uppercase;color:var(--stone)}
+.intro-meta strong{display:block;font-family:'Instrument Serif',serif;font-size:34px;font-weight:400;line-height:1;color:var(--gold);letter-spacing:0}
+.intro-hint{display:flex;align-items:center;gap:15px;font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);white-space:nowrap}
+.intro-hint i{display:block;width:74px;height:1px;background:var(--gold);position:relative;overflow:hidden}
+.intro-hint i::after{content:"";position:absolute;inset:0;background:var(--ivory);transform:translateX(-100%);animation:scan 1.8s ease-in-out infinite}
+@keyframes scan{50%,100%{transform:translateX(100%)}}
+.skip-intro{position:absolute;z-index:8;right:3.5vw;top:50%;min-height:44px;transform:translateY(-50%) rotate(90deg);transform-origin:right top;background:none;border:0;
+  font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);cursor:pointer;transition:color .3s}
+.skip-intro:hover{color:var(--gold-pale)}
+
+.announcement{position:fixed;z-index:100;left:0;right:0;top:0;height:32px;display:flex;align-items:center;justify-content:center;
+  background:var(--gold);color:var(--ink);font-family:'Space Grotesk',monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  transform:translateY(-100%);transition:transform .55s var(--ease)}
+.site-nav{position:fixed;z-index:100;left:0;right:0;top:32px;height:64px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 4vw;background:rgba(10,10,11,.76);border-bottom:1px solid var(--line);backdrop-filter:blur(18px);
+  transform:translateY(calc(-100% - 32px));transition:transform .65s var(--ease)}
+body.entered .announcement,body.entered .site-nav{transform:translateY(0)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-link{position:relative;font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--stone)}
+.nav-link::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-link:hover{color:var(--ivory)}
+.nav-link:hover::after{transform:scaleX(1)}
+.wordmark{font-family:'Space Grotesk',monospace;font-size:13px;font-weight:700;letter-spacing:.28em;text-transform:uppercase}
+.nav-actions{display:flex;align-items:center;justify-content:flex-end;gap:18px}
+.nav-button{min-height:44px;background:none;border:0;cursor:pointer;font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.cart-button{display:flex;align-items:center;gap:10px}
+.cart-count{width:25px;height:25px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:50%;color:var(--gold);font-variant-numeric:tabular-nums}
+.menu-button{display:none}
+.mobile-menu{display:none}
+
+.shop-hero{min-height:100svh;position:relative;display:grid;grid-template-columns:minmax(0,.82fr) minmax(480px,1.18fr);padding-top:var(--header-h);overflow:hidden;background:var(--ink);border-bottom:1px solid var(--line)}
+.hero-copy{position:relative;z-index:3;padding:clamp(80px,12vh,150px) 4vw 58px 5vw;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.hero-copy::before{content:"777";position:absolute;z-index:-1;left:-.06em;top:50%;transform:translateY(-52%);font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:clamp(250px,34vw,600px);line-height:.7;color:transparent;-webkit-text-stroke:1px rgba(201,162,39,.085);letter-spacing:-.12em;white-space:nowrap}
+.hero-status{display:flex;align-items:center;gap:11px;margin-bottom:24px;font-family:'Space Grotesk',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+.hero-status i{width:7px;height:7px;border:1px solid var(--gold);border-radius:50%;box-shadow:0 0 0 5px rgba(201,162,39,.08)}
+.hero-copy h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(60px,7.7vw,124px);line-height:.84;letter-spacing:-.045em;margin-top:28px}
+.hero-copy h2 em{font-weight:400;color:var(--gold)}
+.hero-copy>p{max-width:480px;margin-top:32px;color:var(--stone);font-size:16px;line-height:1.7}
+.hero-actions{display:flex;align-items:center;gap:22px;margin-top:42px}
+.primary-btn{min-height:54px;padding:0 28px;border:1px solid var(--ivory);background:var(--ivory);color:var(--ink);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-family:'Space Grotesk',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:background .35s,color .35s,border-color .35s,transform .35s var(--ease)}
+.primary-btn::after{content:"";position:absolute;inset:-50% auto -50% -35%;width:20%;background:rgba(255,255,255,.5);transform:rotate(18deg) translateX(-220%);transition:transform .75s var(--ease)}
+.primary-btn:hover::after{transform:rotate(18deg) translateX(800%)}
+.primary-btn:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
+.text-btn{min-height:44px;background:none;border:0;border-bottom:1px solid var(--gold);cursor:pointer;font-family:'Space Grotesk',monospace;
+  font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
+.hero-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:auto;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hero-facts div{padding:18px 16px 18px 0;border-right:1px solid var(--line)}
+.hero-facts div+div{padding-left:16px}
+.hero-facts div:last-child{border-right:0}
+.hero-facts b{display:block;font-family:'Instrument Serif',serif;font-size:27px;font-weight:400;color:var(--gold)}
+.hero-facts span{display:block;margin-top:5px;font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone)}
+.hero-visual{position:relative;min-height:calc(100svh - var(--header-h));overflow:hidden;background:var(--panel)}
+.hero-visual::before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(90deg,var(--ink),rgba(10,10,11,0) 18%,rgba(10,10,11,0) 76%,rgba(10,10,11,.12))}
+.hero-visual::after{content:"";position:absolute;z-index:3;inset:18px;border:1px solid rgba(242,239,230,.16);pointer-events:none}
+.hero-visual img{width:100%;height:112%;object-fit:cover;object-position:center top;will-change:transform}
+.hero-index{position:absolute;z-index:4;right:26px;top:28px;font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+.hero-vertical{position:absolute;z-index:4;right:24px;bottom:28px;writing-mode:vertical-rl;font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+.hero-image-label{position:absolute;z-index:4;left:34px;bottom:30px;display:flex;align-items:center;gap:13px;padding:10px 13px;background:rgba(10,10,11,.58);backdrop-filter:blur(12px);
+  font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.hero-image-label::before{content:"";width:26px;height:1px;background:var(--gold)}
+.hero-sigil{position:absolute;z-index:4;left:30px;top:30px;width:70px;height:70px;display:grid;place-items:center;border:1px solid rgba(201,162,39,.54);border-radius:50%;
+  font-family:'Instrument Serif',serif;font-size:24px;color:var(--gold);mix-blend-mode:screen}
+.gold-orbit{position:absolute;z-index:3;width:min(40vw,560px);aspect-ratio:1;right:-16%;bottom:-24%;border:1px solid rgba(201,162,39,.32);border-radius:50%}
+.gold-orbit::before,.gold-orbit::after{content:"";position:absolute;border:1px solid rgba(201,162,39,.2);border-radius:50%;inset:12%}
+.gold-orbit::after{inset:29%;background:radial-gradient(circle,var(--gold) 0 2px,rgba(201,162,39,0) 3px)}
+
+.ticker{height:74px;display:flex;align-items:center;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ticker-track{display:flex;width:max-content;animation:ticker 28s linear infinite}
+.ticker span{font-family:'Instrument Serif',serif;font-size:25px;font-style:italic;color:var(--stone);white-space:nowrap;margin-right:58px}
+.ticker b{font-weight:400;color:var(--gold)}
+@keyframes ticker{to{transform:translateX(-50%)}}
+
+.collection{padding:16vh 0 12vh;background:var(--ink)}
+.product-grid{padding:5vw;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4vw 2.4vw}
+.product-tile{position:relative;overflow:hidden;background:var(--panel);min-height:520px;cursor:pointer;isolation:isolate}
+.product-tile::after{content:"";position:absolute;z-index:3;inset:10px;border:1px solid rgba(242,239,230,.12);pointer-events:none;transition:border-color .45s}
+.product-tile:hover::after{border-color:rgba(201,162,39,.52)}
+.product-tile:nth-child(1){grid-column:span 7;min-height:760px}
+.product-tile:nth-child(2){grid-column:span 5;margin-top:11vh;min-height:640px}
+.product-tile:nth-child(3){grid-column:3/span 8;min-height:640px}
+.tile-media{position:absolute;inset:0;overflow:hidden}
+.tile-media img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease),filter .7s var(--ease)}
+.product-tile:nth-child(2) .tile-media img{object-fit:contain;background:var(--ivory)}
+.product-tile:nth-child(3) .tile-media img{object-fit:cover}
+.product-tile:hover .tile-media img{transform:scale(1.045)}
+.tile-shade{position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(10,10,11,0) 48%,rgba(10,10,11,.92))}
+.product-tile:nth-child(2) .tile-shade{background:linear-gradient(180deg,rgba(10,10,11,0) 60%,rgba(10,10,11,.8))}
+.tile-top{position:absolute;z-index:2;top:18px;left:18px;right:18px;display:flex;justify-content:space-between}
+.tile-badge{padding:9px 11px;background:rgba(10,10,11,.76);backdrop-filter:blur(8px);font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase}
+.tile-index{width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(242,239,230,.28);border-radius:50%;font-family:'Space Grotesk',monospace;font-size:8px}
+.tile-info{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:20px}
+.tile-info h3{font-family:'Instrument Serif',serif;font-size:clamp(32px,4vw,60px);font-weight:400;line-height:.9}
+.tile-info h3 em{font-weight:400;color:var(--gold)}
+.tile-info p{margin-top:11px;font-size:12px;color:var(--stone)}
+.tile-price{text-align:right;font-family:'Instrument Serif',serif;font-size:29px;color:var(--gold)}
+.tile-cta{display:inline-block;margin-top:12px;border-bottom:1px solid var(--gold);font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase}
+
+.product-detail{position:relative;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(380px,.72fr);border-top:1px solid var(--line);background:var(--ink)}
+.product-media{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-right:1px solid var(--line)}
+.gallery-state{position:absolute;z-index:5;left:24px;top:24px;display:flex;align-items:center;gap:12px;padding:11px 14px;background:rgba(10,10,11,.72);border:1px solid rgba(242,239,230,.12);backdrop-filter:blur(14px);
+  font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;pointer-events:none}
+.gallery-state i{width:7px;height:7px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 5px rgba(201,162,39,.1)}
+.media-frame{position:relative;min-height:620px;overflow:hidden;background:var(--ivory);cursor:zoom-in}
+.media-frame:first-child{grid-column:1/-1;min-height:760px}
+.media-frame:nth-child(4){grid-column:1/-1}
+.media-frame img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease),opacity .35s var(--ease);will-change:transform,opacity}
+.media-frame.product-flat img{object-fit:contain}
+.media-frame:hover img{transform:scale(1.035)}
+.media-frame::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,transparent 25%,rgba(255,255,255,.16) 47%,transparent 68%);transform:translateX(-130%);transition:transform 1.1s var(--ease)}
+.media-frame:hover::after{transform:translateX(130%)}
+.media-number{position:absolute;right:16px;top:16px;width:32px;height:32px;display:grid;place-items:center;background:rgba(10,10,11,.76);
+  font-family:'Space Grotesk',monospace;font-size:8px;color:var(--ivory)}
+.purchase{padding:7vh 3.5vw;align-self:start;position:sticky;top:var(--header-h);min-height:calc(100svh - var(--header-h));display:flex;flex-direction:column}
+.purchase-meta{display:flex;justify-content:space-between;gap:20px;font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone)}
+.purchase-meta span:last-child{color:var(--gold)}
+.purchase h2{font-family:'Instrument Serif',serif;font-size:clamp(46px,4.8vw,76px);font-weight:400;line-height:.92;margin-top:34px}
+.purchase-price{font-family:'Instrument Serif',serif;font-style:italic;font-size:38px;color:var(--gold);margin-top:15px;font-variant-numeric:tabular-nums}
+.purchase-copy{margin-top:22px;color:var(--stone);font-size:14px;line-height:1.7}
+.purchase-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.purchase-tag{min-height:30px;display:inline-flex;align-items:center;padding:0 11px;border:1px solid var(--line);font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
+.purchase-tag b{margin-left:6px;color:var(--ivory);font-weight:500}
+.bundle-saving{min-height:36px;margin-top:12px;padding:10px 12px;border-left:2px solid var(--gold);background:rgba(201,162,39,.08);
+  font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--gold-pale)}
+.bundle-saving[hidden]{display:none}
+.option-group{margin-top:30px}
+.option-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.option-head legend,.option-head span{font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.option-head span{color:var(--stone)}
+.option-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line)}
+.variant-button,.size-button{position:relative;min-height:48px;padding:10px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--panel);cursor:pointer;font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;transition:background .25s,color .25s}
+.variant-button:nth-child(2n){border-right:0}
+.variant-button:nth-last-child(-n+2){border-bottom:0}
+.variant-button.active,.size-button.active{background:var(--gold);color:var(--ink)}
+.size-list{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line)}
+.size-button{border-bottom:0}
+.size-button:last-child{border-right:0}
+.size-error{min-height:18px;margin-top:8px;font-size:11px;color:var(--gold-hi)}
+.quantity-row{margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.quantity{height:48px;display:grid;grid-template-columns:42px 45px 42px;border:1px solid var(--line)}
+.quantity button{border:0;background:var(--panel);cursor:pointer;font-size:18px}
+.quantity output{display:grid;place-items:center;border-left:1px solid var(--line);border-right:1px solid var(--line);font-family:'Space Grotesk',monospace;font-size:11px}
+.add-button{flex:1;min-height:54px;border:1px solid var(--gold);background:var(--gold);color:var(--ink);cursor:pointer;
+  font-family:'Space Grotesk',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:background .3s,color .3s,transform .3s var(--ease)}
+.add-button:hover{background:var(--gold-hi);transform:translateY(-2px)}
+.purchase-notes{margin-top:28px;border-top:1px solid var(--line)}
+.purchase-notes details{border-bottom:1px solid var(--line)}
+.purchase-notes summary{min-height:52px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;
+  font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.purchase-notes summary::after{content:"+";font-size:17px;color:var(--gold)}
+.purchase-notes details[open] summary::after{content:"−"}
+.purchase-notes p{padding:0 20px 19px 0;color:var(--stone);font-size:12px;line-height:1.65}
+.purchase-essentials{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;border:1px solid var(--line)}
+.purchase-essential{padding:14px 12px;border-right:1px solid var(--line)}
+.purchase-essential:last-child{border-right:0}
+.purchase-essential span{display:block;font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone)}
+.purchase-essential b{display:block;margin-top:6px;font-size:11px;font-weight:450;color:var(--ivory)}
+
+.craft{min-height:100svh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(460px,.95fr);border-top:1px solid var(--line);background:var(--ivory);color:var(--ink)}
+.craft-visual{position:relative;min-height:100svh;overflow:hidden;background:#dedbd2}
+.craft-visual::after{content:"";position:absolute;inset:18px;border:1px solid rgba(10,10,11,.18);pointer-events:none}
+.craft-visual img{width:100%;height:108%;object-fit:cover;will-change:transform}
+.craft-visual-label{position:absolute;z-index:2;left:34px;right:34px;bottom:30px;display:flex;justify-content:space-between;gap:20px;
+  font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.craft-panel{position:relative;padding:13vh 5vw 9vh;display:flex;flex-direction:column;overflow:hidden}
+.craft-panel::before{content:"777";position:absolute;right:-.06em;top:-.02em;font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(180px,24vw,390px);line-height:.72;color:rgba(110,90,19,.07);letter-spacing:-.11em}
+.craft-panel>*{position:relative;z-index:1}
+.craft-panel h2{max-width:690px;margin-top:26px;font-family:'Instrument Serif',serif;font-size:clamp(52px,6vw,94px);font-weight:400;line-height:.88;letter-spacing:-.04em}
+.craft-panel h2 em{font-weight:400;color:var(--gold-low)}
+.craft-panel>p{max-width:500px;margin-top:30px;color:#6b665a;font-size:15px;line-height:1.75}
+.craft-list{margin-top:auto;border-top:1px solid rgba(10,10,11,.18)}
+.craft-item{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:20px;min-height:102px;border-bottom:1px solid rgba(10,10,11,.18)}
+.craft-index{font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.12em;color:var(--gold-low)}
+.craft-item h3{font-family:'Instrument Serif',serif;font-size:31px;font-weight:400}
+.craft-item p{max-width:220px;color:#6b665a;font-size:12px;line-height:1.55;text-align:right}
+
+.lookbook{padding:18vh 0 16vh;background:var(--panel);overflow:hidden}
+.lookbook-intro{padding:0 5vw 8vh;display:grid;grid-template-columns:1.2fr .8fr;align-items:end;gap:9vw}
+.lookbook-intro h2{font-family:'Instrument Serif',serif;font-size:clamp(54px,8vw,120px);font-weight:400;line-height:.84;letter-spacing:-.04em}
+.lookbook-intro h2 em{font-weight:400;color:var(--gold)}
+.lookbook-intro p{max-width:420px;color:var(--stone);font-size:15px;line-height:1.75}
+.lookbook-grid{padding:0 5vw;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2vw}
+.look-card{position:relative;overflow:hidden;background:var(--ink)}
+.look-card:nth-child(1){grid-column:span 5;aspect-ratio:3/4;margin-top:12vh}
+.look-card:nth-child(2){grid-column:span 7;aspect-ratio:4/5}
+.look-card:nth-child(3){grid-column:2/span 6;aspect-ratio:2/3;margin-top:2vw}
+.look-card:nth-child(4){grid-column:8/span 4;aspect-ratio:2/3;margin-top:12vw}
+.look-card img{width:100%;height:108%;object-fit:cover;will-change:transform}
+.look-caption{position:absolute;z-index:2;left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;gap:20px;
+  font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.13em;text-transform:uppercase}
+.look-caption span:last-child{color:var(--gold)}
+
+.manifesto{position:relative;min-height:92svh;padding:16vh 5vw;display:flex;align-items:center;overflow:hidden;background:var(--ink)}
+.manifesto-rays{position:absolute;width:min(80vw,1100px);aspect-ratio:1;right:-25vw;top:50%;transform:translateY(-50%);border:1px solid rgba(201,162,39,.12);border-radius:50%}
+.manifesto-rays::before,.manifesto-rays::after{content:"";position:absolute;border:1px solid rgba(201,162,39,.12);border-radius:50%;inset:18%}
+.manifesto-rays::after{inset:37%}
+.manifesto-copy{position:relative;z-index:2;max-width:1050px}
+.manifesto-copy p{font-family:'Instrument Serif',serif;font-size:clamp(44px,6.8vw,104px);line-height:.96}
+.manifesto-copy p+p{margin-top:4vh}
+.manifesto-copy em{font-weight:400;color:var(--gold)}
+.manifesto-sign{margin-top:48px;font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+
+.faq{padding:16vh 5vw;display:grid;grid-template-columns:.72fr 1.28fr;gap:10vw;border-top:1px solid var(--line)}
+.faq h2{font-family:'Instrument Serif',serif;font-size:clamp(48px,6.5vw,96px);font-weight:400;line-height:.9}
+.faq h2 em{font-weight:400;color:var(--gold)}
+.faq-side p{margin-top:24px;color:var(--stone);font-size:14px;line-height:1.7}
+.faq-list{border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:30px;list-style:none;cursor:pointer;font-size:16px}
+.faq-list summary::after{content:"+";width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line);color:var(--gold);transition:transform .3s}
+.faq-list details[open] summary::after{transform:rotate(45deg)}
+.faq-list p{padding:0 70px 26px 0;color:var(--stone);font-size:14px;line-height:1.75}
+
+.newsletter{padding:12vh 5vw;display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:end;background:var(--ivory);color:var(--ink)}
+.newsletter h2{font-family:'Instrument Serif',serif;font-size:clamp(50px,7vw,104px);font-weight:400;line-height:.88}
+.newsletter h2 em{font-weight:400;color:var(--gold-low)}
+.newsletter p{max-width:440px;margin-top:22px;color:var(--gold-low);font-size:14px;line-height:1.7}
+.newsletter-form{display:flex;border-bottom:1px solid var(--ink)}
+.newsletter-form input{flex:1;min-width:0;height:58px;border:0;background:none;color:var(--ink);font-size:15px}
+.newsletter-form input::placeholder{color:var(--gold-low)}
+.newsletter-form button{width:140px;border:0;background:none;cursor:pointer;font-family:'Space Grotesk',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+footer{padding:50px 5vw 26px;background:var(--ink)}
+.footer-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:6vw;padding-bottom:70px}
+.footer-brand{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(48px,6vw,90px);color:var(--gold)}
+.footer-col h3{font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:19px}
+.footer-col a,.footer-col button{display:block;margin-top:12px;border:0;background:none;cursor:pointer;font-size:13px;color:var(--ivory)}
+.footer-bottom{padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;
+  font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone)}
+
+.cart-overlay{position:fixed;z-index:200;inset:0;background:rgba(10,10,11,.72);backdrop-filter:blur(7px);opacity:0;pointer-events:none;transition:opacity .35s}
+.cart-drawer{position:fixed;z-index:201;right:0;top:0;width:min(480px,100%);height:100svh;background:var(--ivory);color:var(--ink);
+  transform:translateX(100%);transition:transform .55s var(--ease);display:flex;flex-direction:column}
+body.cart-open .cart-overlay{opacity:1;pointer-events:auto}
+body.cart-open .cart-drawer{transform:translateX(0)}
+.cart-head{height:76px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(110,90,19,.25)}
+.cart-head h2{font-family:'Instrument Serif',serif;font-size:32px;font-weight:400}
+.icon-button{width:44px;height:44px;border:1px solid rgba(110,90,19,.25);background:none;cursor:pointer;font-size:20px}
+.cart-items{flex:1;overflow:auto;padding:18px 24px}
+.cart-empty{height:100%;display:grid;place-items:center;text-align:center;color:var(--gold-low)}
+.cart-empty b{display:block;font-family:'Instrument Serif',serif;font-size:42px;font-weight:400;color:var(--ink)}
+.cart-empty span{display:block;margin-top:10px;font-size:13px}
+.cart-item{display:grid;grid-template-columns:92px 1fr auto;gap:16px;padding:18px 0;border-bottom:1px solid rgba(110,90,19,.22)}
+.cart-item img{width:92px;height:116px;object-fit:cover;background:var(--panel)}
+.cart-item h3{font-size:14px;font-weight:500}
+.cart-item p{margin-top:6px;font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-low)}
+.cart-item-controls{display:flex;align-items:center;gap:10px;margin-top:18px}
+.cart-item-controls button{width:27px;height:27px;border:1px solid rgba(110,90,19,.3);background:none;cursor:pointer}
+.cart-item-controls span{font-family:'Space Grotesk',monospace;font-size:9px}
+.remove-item{margin-top:10px;border:0;border-bottom:1px solid var(--gold-low);background:none;cursor:pointer;color:var(--gold-low);font-size:10px}
+.cart-item-price{font-family:'Instrument Serif',serif;font-size:21px;white-space:nowrap}
+.cart-foot{padding:24px;border-top:1px solid rgba(110,90,19,.25)}
+.cart-subtotal{display:flex;justify-content:space-between;align-items:center}
+.cart-subtotal span{font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase}
+.cart-subtotal b{font-family:'Instrument Serif',serif;font-size:30px;font-weight:400}
+.checkout-button{width:100%;min-height:56px;margin-top:18px;border:1px solid var(--ink);background:var(--ink);color:var(--ivory);cursor:pointer;
+  font-family:'Space Grotesk',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.cart-foot small{display:block;margin-top:12px;color:var(--gold-low);font-size:10px;line-height:1.5}
+
+dialog{border:0;padding:0;background:var(--panel);color:var(--ivory)}
+dialog::backdrop{background:rgba(10,10,11,.88);backdrop-filter:blur(8px)}
+.size-dialog{width:min(760px,calc(100% - 28px));max-height:calc(100svh - 28px)}
+.dialog-head{padding:22px 26px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.dialog-head h2{font-family:'Instrument Serif',serif;font-size:35px;font-weight:400}
+.dialog-close{width:44px;height:44px;border:1px solid var(--line);background:none;cursor:pointer}
+.size-content{padding:34px 26px}
+.size-content>p{color:var(--stone);font-size:13px;line-height:1.7}
+.size-table{width:100%;margin-top:24px;border-collapse:collapse;text-align:center}
+.size-table th,.size-table td{padding:15px 8px;border:1px solid var(--line);font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase}
+.size-table th{color:var(--gold)}
+.size-note{margin-top:18px;padding:14px;border-left:2px solid var(--gold);background:rgba(201,162,39,.08);font-size:12px;color:var(--stone)}
+.lightbox{width:100vw;height:100svh;max-width:none;max-height:none;background:var(--ink)}
+.lightbox-inner{width:100%;height:100%;display:grid;grid-template-rows:72px 1fr 76px}
+.lightbox-top{display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--line)}
+.lightbox-top span{font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--stone)}
+.lightbox-media{min-height:0;display:grid;place-items:center;overflow:hidden;touch-action:none}
+.lightbox-media img{max-width:92vw;max-height:calc(100svh - 170px);object-fit:contain;will-change:transform;cursor:grab}
+.lightbox-controls{display:flex;align-items:center;justify-content:center;gap:12px;border-top:1px solid var(--line)}
+.lightbox-controls button{min-width:54px;height:44px;padding:0 16px;border:1px solid var(--line);background:var(--panel);cursor:pointer}
+.reservation-dialog{width:100vw;height:100svh;max-width:none;max-height:none;margin:0;overflow:hidden;background:rgba(10,10,11,.97)}
+.reservation-dialog::backdrop{background:rgba(10,10,11,.92);backdrop-filter:blur(14px)}
+.reservation-stage{position:relative;width:100%;height:100%;display:grid;place-items:center;overflow:hidden;isolation:isolate}
+.reservation-stage::before{content:"";position:absolute;z-index:-2;width:min(72vw,980px);aspect-ratio:1;border:1px solid rgba(201,162,39,.18);border-radius:50%;
+  box-shadow:0 0 0 14vw rgba(201,162,39,.025),0 0 0 28vw rgba(201,162,39,.018)}
+.reservation-stage::after{content:"";position:absolute;z-index:-1;inset:14px;border:1px solid rgba(201,162,39,.2);pointer-events:none}
+.reservation-index,.reservation-footer{position:absolute;z-index:2;font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+.reservation-index{left:42px;top:36px}
+.reservation-close{position:absolute;z-index:3;right:32px;top:26px;width:48px;height:48px;border:1px solid var(--line);background:rgba(10,10,11,.35);color:var(--ivory);cursor:pointer;
+  font-size:22px;transition:border-color .3s,color .3s,transform .3s}
+.reservation-close:hover{border-color:var(--gold);color:var(--gold);transform:rotate(6deg)}
+.reservation-content{width:min(680px,calc(100% - 40px));padding:60px 20px 44px;text-align:center}
+.reserve-coin-wrap{position:relative;width:184px;height:184px;margin:0 auto 34px;display:grid;place-items:center;perspective:950px;filter:drop-shadow(0 30px 32px rgba(0,0,0,.74))}
+.reserve-coin-aura{position:absolute;inset:-44%;border-radius:50%;background:radial-gradient(circle,rgba(201,162,39,.28),rgba(201,162,39,.05) 42%,transparent 68%)}
+.reserve-coin{position:relative;width:154px;height:154px;transform-style:preserve-3d;will-change:transform}
+.reserve-coin-face{position:absolute;inset:0;border-radius:50%;display:grid;place-items:center;overflow:hidden;backface-visibility:hidden;
+  color:var(--ink);background:radial-gradient(circle at 31% 26%,#f3d66c,var(--gold) 48%,#6e5a13 100%);
+  box-shadow:inset 0 0 0 3px #6e5a13,inset 0 0 0 7px #e2bd43,inset 0 0 22px rgba(10,10,11,.34)}
+.reserve-coin-face::before{content:"";position:absolute;inset:14px;border:1px dashed rgba(110,90,19,.72);border-radius:50%}
+.reserve-coin-face b{font-family:'Instrument Serif',serif;font-size:56px;font-style:italic;font-weight:400;line-height:1;text-shadow:0 2px 0 #efd15d,0 -2px 0 #6e5a13}
+.reserve-coin-face small{position:absolute;bottom:31px;font-family:'Space Grotesk',monospace;font-size:7px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.reserve-coin-front{transform:translateZ(8px)}
+.reserve-coin-back{transform:rotateY(180deg) translateZ(8px)}
+.reserve-coin-edge{position:absolute;inset:-8px;border:8px solid #6e5a13;border-radius:50%;background:repeating-linear-gradient(90deg,#6e5a13 0 2px,#e2bd43 2px 3px);
+  box-shadow:inset 0 0 0 1px #e2bd43,0 0 0 1px var(--gold)}
+.reserve-coin-glint{position:absolute;z-index:2;inset:0;overflow:hidden;border-radius:50%;transform:translateZ(10px);pointer-events:none}
+.reserve-coin-glint i{position:absolute;left:-72%;top:-40%;width:40%;height:180%;transform:rotate(18deg);background:linear-gradient(90deg,transparent,rgba(255,252,236,.88),transparent);filter:blur(4px)}
+.reservation-kicker{font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.reservation-content h2{margin-top:16px;font-family:'Instrument Serif',serif;font-size:clamp(42px,5vw,70px);font-weight:400;line-height:.96}
+.reservation-content h2 em{color:var(--gold);font-style:italic}
+.reservation-content>p{max-width:500px;margin:18px auto 0;color:var(--stone);font-size:13px;line-height:1.65}
+.reservation-selection{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:25px auto 0;padding-top:20px;border-top:1px solid var(--line);
+  font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory)}
+.reservation-selection i{width:4px;height:4px;border-radius:50%;background:var(--gold)}
+.reservation-memory{margin-top:12px;font-family:'Space Grotesk',monospace;font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-low)}
+.reservation-action{display:inline-flex;margin-top:30px;min-width:250px;align-items:center;justify-content:center}
+.reservation-footer{left:42px;right:42px;bottom:32px;display:flex;justify-content:space-between}
+.reservation-footer b{color:var(--gold);font-weight:500;font-variant-numeric:tabular-nums}
+.toast{position:fixed;z-index:250;left:50%;bottom:26px;transform:translate(-50%,140%);max-width:min(430px,calc(100% - 28px));padding:14px 18px;
+  background:var(--gold);color:var(--ink);font-family:'Space Grotesk',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  transition:transform .45s var(--ease)}
+.toast.show{transform:translate(-50%,0)}
+.mobile-buy{display:none}
+
+@media(max-width:980px){
+  :root{--header-h:86px}
+  .site-nav{grid-template-columns:auto 1fr auto;padding:0 18px}
+  .wordmark{justify-self:center;font-size:11px}
+  .nav-links{display:none}
+  .menu-button{display:block}
+  .nav-actions .nav-button:first-child{display:none}
+  .mobile-menu{position:fixed;z-index:99;inset:96px 0 0;padding:9vh 7vw;display:flex;flex-direction:column;background:var(--ink);
+    transform:translateY(-110%);opacity:0;pointer-events:none;transition:transform .55s var(--ease),opacity .35s}
+  body.menu-open .mobile-menu{transform:translateY(0);opacity:1;pointer-events:auto}
+  .mobile-menu a{min-height:84px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);
+    font-family:'Instrument Serif',serif;font-size:clamp(38px,7vw,62px)}
+  .mobile-menu a span{font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.14em;color:var(--gold)}
+  .mobile-menu small{margin-top:auto;font-family:'Space Grotesk',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--stone)}
+  .shop-hero{grid-template-columns:1fr;min-height:100svh}
+  .hero-visual{grid-row:1;min-height:64svh}
+  .hero-copy{grid-row:2;padding:54px 6vw 70px;margin-top:-15svh;background:linear-gradient(180deg,rgba(10,10,11,0),var(--ink) 21%)}
+  .hero-copy::before{top:42%}
+  .hero-copy h2{font-size:clamp(58px,14vw,96px)}
+  .hero-facts{margin-top:52px}
+  .product-detail{grid-template-columns:1fr}
+  .product-media{border-right:0}
+  .purchase{position:relative;top:auto;min-height:0;padding:70px 6vw 110px}
+  .craft{grid-template-columns:1fr}
+  .craft-visual{min-height:74svh}
+  .craft-panel{min-height:82svh;padding:11vh 6vw 8vh}
+  .craft-list{margin-top:9vh}
+  .lookbook-intro{grid-template-columns:1fr}
+  .lookbook-intro p{margin-top:20px}
+  .faq{grid-template-columns:1fr;gap:60px}
+  .newsletter{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1.4fr 1fr 1fr}
+  .footer-brand{grid-column:1/-1}
+}
+@media(min-width:981px) and (max-height:820px){
+  .hero-copy{padding:48px 4vw 30px 5vw}
+  .hero-status{margin-bottom:14px}
+  .hero-copy h2{font-size:clamp(58px,6.2vw,92px);margin-top:18px}
+  .hero-copy>p{margin-top:20px;font-size:14px;line-height:1.58}
+  .hero-actions{margin-top:26px}
+  .hero-facts div{padding-top:12px;padding-bottom:12px}
+  .hero-facts b{font-size:23px}
+}
+@media(max-width:680px){
+  .intro{height:175svh}
+  .intro-stage::after{inset:8px}
+  .intro-top{top:28px}
+  .intro-edition{max-width:150px;text-align:right;line-height:1.5}
+  .intro-aura{width:125vw;top:42%}
+  .intro-emblem{top:41%;width:132vw}
+  .intro-emblem::before{width:82%;height:52%}
+  .intro-chapter{display:none}
+  .intro-copy{left:20px;right:20px;bottom:28px;grid-template-columns:1fr}
+  .intro-kicker{font-size:8px;margin-bottom:12px}
+  .intro-copy h1{font-size:clamp(49px,14.7vw,70px);line-height:.85}
+  .intro-meta{display:none}
+  .intro-hint{justify-self:end;margin-top:17px}
+  .skip-intro{display:block;top:82px;right:18px;min-height:36px;transform:none;border-bottom:1px solid rgba(201,162,39,.45)}
+  .announcement{padding:0 15px;text-align:center;font-size:7px}
+  .section-head{align-items:flex-start;flex-direction:column;padding:0 6vw 28px}
+  .section-head h2{font-size:56px}
+  .site-nav{height:54px}
+  .mobile-menu{inset:86px 0 0}
+  .shop-hero{padding-top:86px}
+  .hero-visual{min-height:72svh}
+  .hero-visual img{height:108%;object-position:54% top}
+  .hero-visual::after{inset:10px}
+  .hero-sigil{left:18px;top:18px;width:56px;height:56px;font-size:20px}
+  .hero-image-label{left:20px;bottom:22px;font-size:8px}
+  .hero-copy{padding-top:70px}
+  .hero-copy h2{font-size:56px}
+  .hero-copy>p{font-size:14px}
+  .hero-actions{align-items:flex-start;flex-direction:column}
+  .primary-btn{width:100%}
+  .hero-facts{grid-template-columns:1fr}
+  .hero-facts div,.hero-facts div+div{padding:13px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .hero-facts div:last-child{border-bottom:0}
+  .ticker{height:62px}
+  .ticker span{font-size:20px}
+  .collection{padding-top:12vh}
+  .product-grid{display:block;padding:28px 6vw}
+  .product-tile,.product-tile:nth-child(1),.product-tile:nth-child(2),.product-tile:nth-child(3){min-height:0;aspect-ratio:3/4;margin:0 0 24px}
+  .product-tile:nth-child(2){aspect-ratio:1/1.2}
+  .tile-info{left:16px;right:16px;bottom:16px}
+  .tile-info h3{font-size:38px}
+  .tile-price{font-size:23px}
+  .product-media{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+  .product-media::-webkit-scrollbar{display:none}
+  .gallery-state{left:14px;top:14px;font-size:8px}
+  .gallery-state::after{content:"↔";margin-left:4px;color:var(--gold)}
+  .media-frame,.media-frame:first-child,.media-frame:nth-child(4){grid-column:auto;flex:0 0 100%;width:100%;min-height:0;aspect-ratio:1/1.04;scroll-snap-align:start;scroll-snap-stop:always}
+  .purchase{padding:56px 6vw 120px}
+  .purchase h2{font-size:50px}
+  .purchase-tags{gap:6px}
+  .purchase-tag{font-size:8px}
+  .option-list{grid-template-columns:1fr 1fr}
+  .quantity-row{align-items:stretch;flex-direction:column}
+  .add-button{min-height:56px}
+  .purchase-essentials{grid-template-columns:1fr}
+  .purchase-essential{border-right:0;border-bottom:1px solid var(--line)}
+  .purchase-essential:last-child{border-bottom:0}
+  .craft-visual{min-height:66svh}
+  .craft-visual-label{left:20px;right:20px;bottom:18px;font-size:8px}
+  .craft-panel{min-height:auto;padding:10vh 6vw}
+  .craft-panel h2{font-size:56px}
+  .craft-panel>p{font-size:14px}
+  .craft-list{margin-top:60px}
+  .craft-item{grid-template-columns:38px 1fr;min-height:98px}
+  .craft-item h3{font-size:27px}
+  .craft-item p{grid-column:2;text-align:left;margin-top:-18px;padding-bottom:16px}
+  .lookbook{padding-top:13vh}
+  .lookbook-intro{padding:0 6vw 56px}
+  .lookbook-intro h2{font-size:58px}
+  .lookbook-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 6vw}
+  .look-card:nth-child(1),.look-card:nth-child(2),.look-card:nth-child(3),.look-card:nth-child(4){grid-column:auto;margin:0;aspect-ratio:2/3}
+  .look-card:nth-child(1){grid-column:1/-1;aspect-ratio:3/4}
+  .look-card:nth-child(2){grid-column:1/-1;aspect-ratio:3/4}
+  .look-caption{font-size:7px}
+  .manifesto{padding:13vh 6vw;min-height:80svh}
+  .manifesto-copy p{font-size:48px}
+  .faq{padding:13vh 6vw}
+  .faq h2{font-size:56px}
+  .faq-list summary{font-size:14px}
+  .newsletter{padding:11vh 6vw}
+  .newsletter h2{font-size:54px}
+  .newsletter-form button{width:100px}
+  footer{padding-left:6vw;padding-right:6vw}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .footer-bottom{flex-direction:column}
+  .reservation-stage::after{inset:8px}
+  .reservation-index{left:22px;top:22px}
+  .reservation-close{right:16px;top:14px}
+  .reservation-content{padding:70px 20px 64px}
+  .reserve-coin-wrap{width:148px;height:148px;margin-bottom:26px}
+  .reserve-coin{width:124px;height:124px}
+  .reserve-coin-face b{font-size:46px}
+  .reserve-coin-face small{bottom:24px;font-size:6px}
+  .reservation-content h2{font-size:46px}
+  .reservation-content>p{font-size:12px}
+  .reservation-action{width:100%;min-width:0}
+  .reservation-footer{left:22px;right:22px;bottom:20px}
+  .mobile-buy{position:fixed;z-index:90;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));min-height:60px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;
+    border:1px solid var(--gold);background:rgba(10,10,11,.92);color:var(--ivory);backdrop-filter:blur(16px);font-family:'Space Grotesk',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    transform:translateY(140%);transition:transform .45s var(--ease)}
+  .mobile-buy.show{transform:translateY(0)}
+  .mobile-buy b{font-family:'Instrument Serif',serif;font-size:24px;font-weight:400;color:var(--gold)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+  .intro{height:70svh}
+  .intro-stage{height:70svh;position:relative}
+  #explosionCanvas{display:none}
+  .intro-copy h1{font-size:clamp(44px,9vw,92px)}
+  .intro-hint,.skip-intro{display:none}
+  .announcement,.site-nav{transform:translateY(0)}
+  .hero-visual img,.look-card img{transform:none!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="pageProgress" aria-hidden="true"></div>
+
+<section class="intro" id="intro" aria-label="Ouverture Aura Lucky 777">
+  <div class="intro-stage" id="introStage">
+    <canvas id="explosionCanvas" aria-hidden="true"></canvas>
+    <div class="intro-emblem" aria-hidden="true">
+      <img src="assets/v3/hero-777-black-chrome.webp" width="1448" height="1086" alt="" fetchpriority="high">
+    </div>
+    <div class="intro-aura" aria-hidden="true"></div>
+    <div class="intro-vignette" aria-hidden="true"></div>
+    <div class="intro-top intro-ui">
+      <span class="intro-brand">Aura Lucky</span>
+      <span class="intro-edition">Drop 001 · 50 pièces numérotées</span>
+    </div>
+    <div class="intro-chapter">Sculpture 777 / 001</div>
+    <div class="intro-copy">
+      <div class="intro-message">
+        <div class="intro-kicker">Le signe précède la pièce</div>
+        <h1 class="intro-ui"><span>La chance ne se trouve pas.</span><em>Elle se provoque.</em></h1>
+      </div>
+      <div class="intro-meta">
+        <strong>777</strong>
+        <span>Objet 001 · Chrome noir</span>
+        <div class="intro-hint"><i></i><span>Scroller pour entrer</span></div>
+      </div>
+    </div>
+    <button class="skip-intro" id="skipIntro" type="button">Passer l’ouverture ↘</button>
+  </div>
+</section>
+
+<div class="announcement">Drop 001 · 50 pièces numérotées · Aucun restock</div>
+<header class="site-nav" aria-label="Navigation principale">
+  <nav class="nav-links" aria-label="Sections">
+    <a class="nav-link" href="#collection">Le drop</a>
+    <a class="nav-link" href="#product">Shop</a>
+    <a class="nav-link" href="#lookbook">Lookbook</a>
+  </nav>
+  <button class="nav-button menu-button" id="menuButton" type="button" aria-label="Ouvrir le menu">Menu</button>
+  <a class="wordmark" href="#home">Aura Lucky</a>
+  <div class="nav-actions">
+    <button class="nav-button" id="sizeGuideHeader" type="button">Guide des tailles</button>
+    <button class="nav-button cart-button" id="cartOpen" type="button" aria-label="Ouvrir le panier">
+      Panier <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile" aria-hidden="true">
+  <a href="#collection"><span>01</span>Le drop</a>
+  <a href="#product"><span>02</span>Shop</a>
+  <a href="#lookbook"><span>03</span>Lookbook</a>
+  <a href="#faq"><span>04</span>FAQ</a>
+  <small>Aura Lucky · Drop 001 · Édition limitée</small>
+</nav>
+
+<main>
+  <section class="shop-hero" id="home">
+    <div class="hero-copy">
+      <div class="hero-status"><i></i><span>Drop 001 · Édition limitée</span></div>
+      <div class="eyebrow">Uniforme 001 · Noir / Ivoire</div>
+      <h2>Porter le signe. <em>Créer l’élan.</em></h2>
+      <p>Un uniforme unisexe pensé comme un talisman : noir dense, broderies ivoire et numéro unique. Choisis la pièce. Choisis la taille. Le reste t’appartient.</p>
+      <div class="hero-actions">
+        <a class="primary-btn" href="#product">Réserver ma pièce</a>
+        <a class="text-btn" href="#collection">Voir le drop</a>
+      </div>
+      <div class="hero-facts">
+        <div><b>50</b><span>pièces seulement</span></div>
+        <div><b>777</b><span>signature brodée</span></div>
+        <div><b>XS—XL</b><span>coupe unisexe</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img id="heroModel" src="assets/v3/model-man-walk.webp" width="863" height="1823" alt="Mannequin homme portant l’ensemble noir Aura Lucky 777 et avançant vers l’objectif">
+      <span class="hero-sigil" aria-hidden="true">777</span>
+      <span class="hero-index">01 / Homme</span>
+      <span class="hero-vertical">Aura Lucky — campagne Drop 001</span>
+      <span class="hero-image-label">Silhouette 001 · Ensemble short</span>
+      <div class="gold-orbit" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>le signe se porte <b>—</b> 777</span><span>50 pièces <b>—</b> aucun restock</span><span>unisexe <b>—</b> coupe libre</span><span>brodé <b>—</b> numéroté</span>
+      <span>le signe se porte <b>—</b> 777</span><span>50 pièces <b>—</b> aucun restock</span><span>unisexe <b>—</b> coupe libre</span><span>brodé <b>—</b> numéroté</span>
+    </div>
+  </div>
+
+  <section class="collection" id="collection">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Drop 001 · La sélection</div>
+        <h2>Trois façons de <em>porter le 777.</em></h2>
+      </div>
+      <p>Chaque pièce peut se porter seule. L’ensemble associe le haut au short ou au jogging, selon ton mouvement.</p>
+    </div>
+    <div class="product-grid">
+      <article class="product-tile" data-product="ensemble-short" tabindex="0" role="button" aria-label="Réserver l’ensemble 777 avec short">
+        <div class="tile-media"><img src="assets/v3/model-man-back.webp" width="1086" height="1448" alt="Ensemble Aura Lucky vu de dos sur mannequin homme" loading="lazy" decoding="async"></div>
+        <div class="tile-shade"></div>
+        <div class="tile-top"><span class="tile-badge">Le look complet</span><span class="tile-index">01</span></div>
+        <div class="tile-info">
+          <div><h3>Ensemble <em>777</em></h3><p>Longsleeve + short ou jogging</p><span class="tile-cta">Réserver l’ensemble</span></div>
+          <div class="tile-price">84–94 €</div>
+        </div>
+      </article>
+      <article class="product-tile" data-product="longsleeve" tabindex="0" role="button" aria-label="Réserver le longsleeve 777">
+        <div class="tile-media"><img src="assets/v3/product-flat-front-back.webp" width="1195" height="896" alt="Longsleeve Aura Lucky vu de face et de dos" loading="lazy" decoding="async"></div>
+        <div class="tile-shade"></div>
+        <div class="tile-top"><span class="tile-badge">Signature manche</span><span class="tile-index">02</span></div>
+        <div class="tile-info">
+          <div><h3>Longsleeve <em>777</em></h3><p>Noir · broderie ivoire</p><span class="tile-cta">Réserver le longsleeve</span></div>
+          <div class="tile-price">49 €</div>
+        </div>
+      </article>
+      <article class="product-tile" data-product="short" tabindex="0" role="button" aria-label="Réserver le short ou le jogging 777">
+        <div class="tile-media"><img src="assets/v3/product-detail-triptych.webp" width="1195" height="896" alt="Détails du short et du longsleeve Aura Lucky" loading="lazy" decoding="async"></div>
+        <div class="tile-shade"></div>
+        <div class="tile-top"><span class="tile-badge">Bas 777</span><span class="tile-index">03</span></div>
+        <div class="tile-info">
+          <div><h3>Short ou <em>jogging</em></h3><p>Deux volumes, une signature</p><span class="tile-cta">Réserver le bas</span></div>
+          <div class="tile-price">42–55 €</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="product-detail" id="product">
+    <div class="product-media" id="productMedia">
+      <div class="gallery-state"><i></i><span id="galleryState">Ensemble + short · 4 vues</span></div>
+      <button class="media-frame product-flat" type="button" data-lightbox="0" aria-label="Agrandir la vue du produit">
+        <img src="assets/v3/product-flat-front-back.webp" width="1195" height="896" alt="Vues face et dos du longsleeve et du short Aura Lucky" loading="lazy">
+        <span class="media-number">01</span>
+      </button>
+      <button class="media-frame" type="button" data-lightbox="1" aria-label="Agrandir le détail produit">
+        <img src="assets/v3/product-detail-triptych.webp" width="1195" height="896" alt="Détails de broderie et matière Aura Lucky" loading="lazy">
+        <span class="media-number">02</span>
+      </button>
+      <button class="media-frame product-flat" type="button" data-lightbox="2" aria-label="Agrandir les vues latérales">
+        <img src="assets/v3/product-flat-side.webp" width="1195" height="896" alt="Vues latérales de l’ensemble Aura Lucky" loading="lazy">
+        <span class="media-number">03</span>
+      </button>
+      <button class="media-frame" type="button" data-lightbox="3" aria-label="Agrandir la variation du produit">
+        <img src="assets/v3/product-set-variant.webp" width="1195" height="896" alt="Variation de l’ensemble noir Aura Lucky" loading="lazy">
+        <span class="media-number">04</span>
+      </button>
+    </div>
+    <form class="purchase" id="productForm">
+      <div class="purchase-meta"><span>Drop 001 / Pièce numérotée</span><span>Édition 50</span></div>
+      <h2 id="productTitle" aria-live="polite">Ensemble 777 — Short</h2>
+      <div class="purchase-price" id="productPrice">84 €</div>
+      <p class="purchase-copy" id="productCopy">Le longsleeve signature associé au short 777. Une silhouette noire, brodée ivoire, pensée pour être portée ensemble ou séparément.</p>
+      <div class="purchase-tags">
+        <span class="purchase-tag">Coloris <b>Noir</b></span>
+        <span class="purchase-tag">Coupe <b>Unisexe</b></span>
+        <span class="purchase-tag">Finition <b>Broderie</b></span>
+      </div>
+      <div class="bundle-saving" id="bundleSaving">Avantage ensemble · 7 € économisés</div>
+
+      <fieldset class="option-group">
+        <div class="option-head"><legend>Choisir la pièce</legend><span id="variantLabel">Ensemble + short</span></div>
+        <div class="option-list" id="variantList">
+          <button class="variant-button" type="button" data-variant="longsleeve" aria-pressed="false">Longsleeve</button>
+          <button class="variant-button" type="button" data-variant="short" aria-pressed="false">Short</button>
+          <button class="variant-button" type="button" data-variant="jogging" aria-pressed="false">Jogging</button>
+          <button class="variant-button active" type="button" data-variant="ensemble-short" aria-pressed="true">Ensemble + short</button>
+          <button class="variant-button" type="button" data-variant="ensemble-jogging" aria-pressed="false">Ensemble + jogging</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="option-group">
+        <div class="option-head"><legend>Choisir la taille</legend><button class="text-btn" id="sizeGuideProduct" type="button">Guide</button></div>
+        <div class="size-list" id="sizeList">
+          <button class="size-button" type="button" data-size="XS" aria-pressed="false">XS</button>
+          <button class="size-button" type="button" data-size="S" aria-pressed="false">S</button>
+          <button class="size-button" type="button" data-size="M" aria-pressed="false">M</button>
+          <button class="size-button" type="button" data-size="L" aria-pressed="false">L</button>
+          <button class="size-button" type="button" data-size="XL" aria-pressed="false">XL</button>
+        </div>
+        <p class="size-error" id="sizeError" aria-live="polite"></p>
+      </fieldset>
+
+      <div class="quantity-row">
+        <div class="quantity" aria-label="Quantité">
+          <button id="quantityMinus" type="button" aria-label="Diminuer la quantité">−</button>
+          <output id="quantityOutput">1</output>
+          <button id="quantityPlus" type="button" aria-label="Augmenter la quantité">+</button>
+        </div>
+        <button class="add-button" type="submit">Réserver ma pièce</button>
+      </div>
+
+      <div class="purchase-notes">
+        <details>
+          <summary>Coupe et taille</summary>
+          <p>Coupe unisexe et décontractée. Le mannequin de référence mesure 1m75 et porte une taille M. Les mesures vêtement exactes restent à confirmer avant l’ouverture des commandes.</p>
+        </details>
+        <details>
+          <summary>Composition et entretien</summary>
+          <p>La composition et le grammage définitifs du blank seront publiés avant l’ouverture du Drop 001. Aucun achat ne sera demandé sans cette information.</p>
+        </details>
+        <details>
+          <summary>Livraison et retours</summary>
+          <p>Les délais d’expédition et modalités de retour seront affichés avant le paiement lors de la mise en production Shopify.</p>
+        </details>
+      </div>
+      <div class="purchase-essentials" aria-label="Caractéristiques essentielles">
+        <div class="purchase-essential"><span>Série</span><b>50 pièces</b></div>
+        <div class="purchase-essential"><span>Tailles</span><b>XS à XL</b></div>
+        <div class="purchase-essential"><span>Statut</span><b>Détails à confirmer</b></div>
+      </div>
+    </form>
+  </section>
+
+  <section class="craft" aria-labelledby="craftTitle">
+    <figure class="craft-visual">
+      <img id="craftImage" src="assets/v3/product-detail-triptych-alt.webp" width="1195" height="896" alt="Détails rapprochés de la pièce Aura Lucky 777" loading="lazy">
+      <figcaption class="craft-visual-label"><span>Étude matière / 001</span><span>Broderie signature</span></figcaption>
+    </figure>
+    <div class="craft-panel">
+      <div class="eyebrow" style="color:var(--gold-low)">Les détails font le signe</div>
+      <h2 id="craftTitle">Pensé comme un talisman. <em>Lu comme une pièce.</em></h2>
+      <p>Le Drop 001 ne repose pas sur un logo répété. Sa présence vient d’un vocabulaire précis : le 777, l’écriture Aura Lucky et une silhouette noire qui laisse parler les détails.</p>
+      <div class="craft-list">
+        <article class="craft-item"><span class="craft-index">01</span><h3>Signature brodée</h3><p>Le 777 poitrine et l’écriture sur la manche structurent la silhouette.</p></article>
+        <article class="craft-item"><span class="craft-index">02</span><h3>Édition numérotée</h3><p>Cinquante pièces composent le premier chapitre Aura Lucky.</p></article>
+        <article class="craft-item"><span class="craft-index">03</span><h3>Port unisexe</h3><p>Une coupe libre, montrée sur plusieurs corps et plusieurs mouvements.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="lookbook" id="lookbook">
+    <div class="lookbook-intro">
+      <div>
+        <div class="eyebrow">Campagne 001 · Unisexe</div>
+        <h2>D’abord l’allure. <em>Ensuite le regard.</em></h2>
+      </div>
+      <p>Le même uniforme, quatre présences. Une coupe assez libre pour changer de corps sans perdre sa ligne.</p>
+    </div>
+    <div class="lookbook-grid">
+      <figure class="look-card">
+        <img src="assets/v3/model-man-walk.webp" width="863" height="1823" alt="Mannequin homme avançant vers l’objectif en Aura Lucky" loading="lazy" decoding="async">
+        <figcaption class="look-caption"><span>Approche / Homme</span><span>Look 01</span></figcaption>
+      </figure>
+      <figure class="look-card">
+        <img src="assets/v3/model-man-back.webp" width="1086" height="1448" alt="Mannequin homme présentant le dos et la manche Aura Lucky" loading="lazy" decoding="async">
+        <figcaption class="look-caption"><span>Dos / Signature</span><span>Look 02</span></figcaption>
+      </figure>
+      <figure class="look-card">
+        <img src="assets/v3/model-woman-full.webp" width="1024" height="1536" alt="Mannequin femme portant l’ensemble unisexe Aura Lucky" loading="lazy" decoding="async">
+        <figcaption class="look-caption"><span>Présence / Femme</span><span>Look 03</span></figcaption>
+      </figure>
+      <figure class="look-card">
+        <img src="assets/v3/model-woman-motion.webp" width="1023" height="1538" alt="Mannequin femme en mouvement portant Aura Lucky" loading="lazy" decoding="async">
+        <figcaption class="look-caption"><span>Mouvement / Femme</span><span>Look 04</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <div class="manifesto-rays" aria-hidden="true"></div>
+    <div class="manifesto-copy">
+      <p>On ne vend pas la chance.</p>
+      <p>On crée l’uniforme de ceux qui <em>la provoquent.</em></p>
+      <div class="manifesto-sign">Aura Lucky · Drop 001 · Paris</div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="faq-side">
+      <div class="eyebrow">Les faits · Sans détour</div>
+      <h2>Avant de choisir <em>ta pièce.</em></h2>
+      <p>Les informations produit encore en validation seront complétées avant que le paiement soit activé.</p>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>Comment choisir ma taille ?</summary>
+        <p>La coupe est unisexe et décontractée. Le modèle de référence mesure 1m75 et porte du M. Utilise le guide pour comparer les tailles ; les mesures exactes seront ajoutées avant l’ouverture.</p>
+      </details>
+      <details>
+        <summary>Puis-je acheter les pièces séparément ?</summary>
+        <p>Oui. Le longsleeve, le short et le jogging sont proposés séparément. Deux ensembles associent le longsleeve au short ou au jogging.</p>
+      </details>
+      <details>
+        <summary>Le Drop 001 sera-t-il réédité ?</summary>
+        <p>Non. Le Drop 001 est limité à 50 pièces numérotées. Une fois clos, il ne sera pas remis en stock.</p>
+      </details>
+      <details>
+        <summary>Quand ma commande sera-t-elle expédiée ?</summary>
+        <p>Le délai définitif sera affiché avant le paiement. Le site ne présente volontairement aucune promesse d’expédition non validée.</p>
+      </details>
+      <details>
+        <summary>Comment fonctionnent les retours ?</summary>
+        <p>Les conditions de retour seront publiées avant l’ouverture des commandes et rappelées dans le checkout Shopify.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div>
+      <div class="eyebrow" style="color:var(--gold-low)">Accès anticipé</div>
+      <h2>24 heures avant <em>les autres.</em></h2>
+      <p>La liste reçoit la date, l’heure et l’accès au Drop 001 avant l’ouverture publique.</p>
+    </div>
+    <form class="newsletter-form" id="newsletterForm">
+      <label class="sr-only" for="newsletterEmail">Adresse email</label>
+      <input id="newsletterEmail" type="email" placeholder="ton@email.fr" required>
+      <button type="submit">Rejoindre</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">Aura Lucky</div>
+    <div class="footer-col"><h3>Shop</h3><a href="#product">Drop 001</a><a href="#collection">Toutes les pièces</a><button type="button" data-open-size>Guide des tailles</button></div>
+    <div class="footer-col"><h3>Maison</h3><a href="#lookbook">Lookbook</a><a href="#faq">FAQ</a><a href="#home">Notre manifeste</a></div>
+    <div class="footer-col"><h3>Suivre</h3><a href="#" aria-label="Instagram Aura Lucky">Instagram</a><a href="#" aria-label="TikTok Aura Lucky">TikTok</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Aura Lucky</span><span>Drop 001 · 50 pièces</span><span>Site prototype · Checkout à connecter</span></div>
+</footer>
+
+<button class="mobile-buy" id="mobileBuy" type="button"><span id="mobileBuyLabel">Choisir une taille</span><b id="mobilePrice">84 €</b></button>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Panier" aria-hidden="true">
+  <div class="cart-head"><h2>Ton panier</h2><button class="icon-button" id="cartClose" type="button" aria-label="Fermer le panier">×</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal"><span>Sous-total</span><b id="cartSubtotal">0 €</b></div>
+    <button class="checkout-button" id="checkoutButton" type="button">Passer au paiement</button>
+    <small>Le checkout final sera relié à Shopify. Aucun paiement n’est simulé dans cette démo.</small>
+  </div>
+</aside>
+
+<dialog class="size-dialog" id="sizeGuide" aria-labelledby="sizeTitle">
+  <div class="dialog-head"><h2 id="sizeTitle">Guide des tailles</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Fermer">×</button></div>
+  <div class="size-content">
+    <p>Coupe unisexe et décontractée. Pour référence, le mannequin mesure 1m75 et porte une taille M.</p>
+    <table class="size-table">
+      <thead><tr><th>Taille</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th></tr></thead>
+      <tbody><tr><th>Largeur</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><th>Longueur</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tbody>
+    </table>
+    <div class="size-note">Les mesures exactes du blank n’ont pas encore été fournies. Elles seront ajoutées ici avant l’ouverture des commandes.</div>
+  </div>
+</dialog>
+
+<dialog class="lightbox" id="lightbox" aria-label="Galerie produit">
+  <div class="lightbox-inner">
+    <div class="lightbox-top"><span id="lightboxCaption">Vue produit 01 / 04</span><button class="dialog-close" id="lightboxClose" type="button" aria-label="Fermer">×</button></div>
+    <div class="lightbox-media" id="lightboxMedia"><img id="lightboxImage" src="assets/v3/product-flat-front-back.webp" alt="Vue produit agrandie"></div>
+    <div class="lightbox-controls">
+      <button id="lightboxPrev" type="button" aria-label="Image précédente">←</button>
+      <button id="lightboxReset" type="button">100 %</button>
+      <button id="lightboxNext" type="button" aria-label="Image suivante">→</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="reservation-dialog" id="reservationDialog" aria-labelledby="reservationTitle" aria-describedby="reservationDescription">
+  <div class="reservation-stage">
+    <span class="reservation-index">Aura Lucky · Attribution 001</span>
+    <button class="reservation-close" id="reservationClose" type="button" aria-label="Fermer la confirmation">×</button>
+    <div class="reservation-content" id="reservationContent">
+      <div class="reserve-coin-wrap" aria-hidden="true">
+        <div class="reserve-coin-aura" id="reserveCoinAura"></div>
+        <div class="reserve-coin" id="reserveCoin">
+          <div class="reserve-coin-edge"></div>
+          <div class="reserve-coin-face reserve-coin-front"><b>777</b><small>Drop 001</small></div>
+          <div class="reserve-coin-face reserve-coin-back"><b>AL</b><small>Aura Lucky</small></div>
+          <div class="reserve-coin-glint"><i id="reserveCoinGlint"></i></div>
+        </div>
+      </div>
+      <div class="reservation-kicker">Le signe a tranché</div>
+      <h2 id="reservationTitle">La pièce <em>n° 12</em> t’a choisi.</h2>
+      <p id="reservationDescription">Elle est mise de côté pendant 15 minutes, le temps de finaliser ta réservation.</p>
+      <div class="reservation-selection" id="reservationSelection"></div>
+      <div class="reservation-memory" id="reservationMemory" hidden>Attribution conservée sur cet appareil</div>
+      <button class="primary-btn reservation-action" id="reservationContinue" type="button">Voir ma réservation</button>
+    </div>
+    <div class="reservation-footer"><span>Drop 001 · 50 pièces</span><span>Maintien <b id="reservationTimer">15:00</b></span></div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const formatPrice = value => `${value} €`;
+  const products = {
+    longsleeve:{
+      name:'Longsleeve 777',label:'Longsleeve',price:49,copy:'Le haut signature du Drop 001 : noir dense, 777 poitrine et broderie Aura Lucky sur la manche.',image:'assets/v3/product-flat-front-back.webp',
+      media:[
+        {src:'assets/v3/product-flat-front-back.webp',alt:'Longsleeve Aura Lucky 777 vu de face et de dos',fit:'contain'},
+        {src:'assets/v3/product-detail-triptych.webp',alt:'Broderies du longsleeve Aura Lucky vues en détail',fit:'cover'},
+        {src:'assets/v3/model-man-walk.webp',alt:'Longsleeve Aura Lucky porté de face par un mannequin homme',fit:'cover'},
+        {src:'assets/v3/model-man-back.webp',alt:'Longsleeve Aura Lucky porté de dos par un mannequin homme',fit:'cover'}
+      ]
+    },
+    short:{
+      name:'Short 777',label:'Short',price:42,copy:'Le short noir à volume décontracté, marqué 777. Pensé pour compléter le longsleeve ou vivre seul.',image:'assets/v3/product-detail-triptych.webp',
+      media:[
+        {src:'assets/v3/product-detail-triptych.webp',alt:'Short Aura Lucky 777 et détails de broderie',fit:'cover'},
+        {src:'assets/v3/product-flat-front-back.webp',alt:'Short Aura Lucky présenté avec le longsleeve du Drop 001',fit:'contain'},
+        {src:'assets/v3/model-man-walk.webp',alt:'Short Aura Lucky porté en mouvement par un mannequin homme',fit:'cover'},
+        {src:'assets/v3/model-woman-full.webp',alt:'Silhouette Aura Lucky unisexe portée par un mannequin femme',fit:'cover'}
+      ]
+    },
+    jogging:{
+      name:'Jogging 777',label:'Jogging',price:55,copy:'Le bas long du Drop 001, noir et numéroté. La silhouette la plus enveloppante de la collection.',image:'assets/v3/product-flat-side.webp',
+      media:[
+        {src:'assets/v3/product-flat-side.webp',alt:'Jogging Aura Lucky 777 présenté à plat',fit:'contain'},
+        {src:'assets/v3/product-set-variant.webp',alt:'Ensemble long Aura Lucky 777 présenté à plat',fit:'contain'},
+        {src:'assets/v3/product-detail-triptych-alt.webp',alt:'Détails textiles du Drop 001 Aura Lucky',fit:'cover'},
+        {src:'assets/v3/product-flat-front-back.webp',alt:'Vues produit complémentaires du Drop 001 Aura Lucky',fit:'contain'}
+      ]
+    },
+    'ensemble-short':{
+      name:'Ensemble 777 — Short',label:'Ensemble + short',price:84,saving:7,copy:'Le longsleeve signature associé au short 777. Une silhouette noire, brodée ivoire, pensée pour être portée ensemble ou séparément.',image:'assets/v3/model-man-back.webp',
+      media:[
+        {src:'assets/v3/product-flat-front-back.webp',alt:'Ensemble Aura Lucky avec longsleeve et short vu à plat',fit:'contain'},
+        {src:'assets/v3/product-detail-triptych.webp',alt:'Détails de broderie du longsleeve et du short Aura Lucky',fit:'cover'},
+        {src:'assets/v3/model-man-walk.webp',alt:'Ensemble short Aura Lucky porté de face en mouvement',fit:'cover'},
+        {src:'assets/v3/model-man-back.webp',alt:'Ensemble short Aura Lucky porté de dos',fit:'cover'}
+      ]
+    },
+    'ensemble-jogging':{
+      name:'Ensemble 777 — Jogging',label:'Ensemble + jogging',price:94,saving:10,copy:'Le longsleeve signature associé au jogging 777. Le total look du Drop 001 dans sa version longue.',image:'assets/v3/product-flat-side.webp',
+      media:[
+        {src:'assets/v3/product-flat-side.webp',alt:'Ensemble Aura Lucky avec jogging présenté à plat',fit:'contain'},
+        {src:'assets/v3/product-set-variant.webp',alt:'Variation longue de l’ensemble Aura Lucky 777',fit:'contain'},
+        {src:'assets/v3/product-detail-triptych-alt.webp',alt:'Détails de l’ensemble long Aura Lucky 777',fit:'cover'},
+        {src:'assets/v3/product-detail-triptych.webp',alt:'Broderies signature du Drop 001 Aura Lucky',fit:'cover'}
+      ]
+    }
+  };
+
+  const state = {variant:'ensemble-short',size:null,quantity:1,cart:[]};
+  const cartKey = 'aura-lucky-shop-v3-cart';
+  const validSizes=new Set(['XS','S','M','L','XL']);
+  try{
+    const savedCart=JSON.parse(localStorage.getItem(cartKey)||'[]');
+    if(Array.isArray(savedCart)){
+      state.cart=savedCart
+        .filter(item=>products[item.variant]&&validSizes.has(item.size))
+        .map(item=>{
+          const product=products[item.variant];
+          return{variant:item.variant,name:product.name,size:item.size,price:product.price,quantity:Math.min(5,Math.max(1,Number(item.quantity)||1)),image:product.image,reservation:/^\d{1,2}$/.test(String(item.reservation||''))?String(item.reservation):null};
+        });
+    }
+  }catch(_){state.cart=[]}
+
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  const showToast = message => {
+    toast.textContent=message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>toast.classList.remove('show'),2600);
+  };
+
+  const productTitle=document.getElementById('productTitle');
+  const productPrice=document.getElementById('productPrice');
+  const productCopy=document.getElementById('productCopy');
+  const variantLabel=document.getElementById('variantLabel');
+  const mobilePrice=document.getElementById('mobilePrice');
+  const bundleSaving=document.getElementById('bundleSaving');
+  const galleryState=document.getElementById('galleryState');
+  const mediaFrames=[...document.querySelectorAll('.media-frame')];
+  let gallery=products[state.variant].media.map(item=>({src:item.src,alt:item.alt}));
+  const updateGallery=product=>{
+    gallery=product.media.map(item=>({src:item.src,alt:item.alt}));
+    galleryState.textContent=`${product.label} · ${gallery.length} vues`;
+    mediaFrames.forEach((frame,index)=>{
+      const media=product.media[index];
+      const image=frame.querySelector('img');
+      frame.classList.toggle('product-flat',media.fit==='contain');
+      frame.setAttribute('aria-label',`Agrandir : ${media.alt}`);
+      if(image.getAttribute('src')===media.src)return;
+      image.src=media.src;
+      image.alt=media.alt;
+      if(!RM&&image.animate){
+        image.animate(
+          [{opacity:.22,transform:'scale(.985)'},{opacity:1,transform:'scale(1)'}],
+          {duration:620,easing:'cubic-bezier(.16,1,.3,1)'}
+        );
+      }
+    });
+    if(innerWidth<=680)document.getElementById('productMedia').scrollTo({left:0,behavior:RM?'auto':'smooth'});
+  };
+  const setVariant = key => {
+    if(!products[key])return;
+    state.variant=key;
+    document.querySelectorAll('.variant-button').forEach(button=>{
+      const active=button.dataset.variant===key;
+      button.classList.toggle('active',active);
+      button.setAttribute('aria-pressed',String(active));
+    });
+    const product=products[key];
+    productTitle.textContent=product.name;
+    productPrice.textContent=formatPrice(product.price);
+    productCopy.textContent=product.copy;
+    variantLabel.textContent=product.label;
+    mobilePrice.textContent=formatPrice(product.price);
+    bundleSaving.hidden=!product.saving;
+    if(product.saving)bundleSaving.textContent=`Avantage ensemble · ${product.saving} € économisés`;
+    updateGallery(product);
+  };
+  document.getElementById('variantList').addEventListener('click',event=>{
+    const button=event.target.closest('.variant-button');
+    if(button)setVariant(button.dataset.variant);
+  });
+  setVariant(state.variant);
+  document.querySelectorAll('.product-tile').forEach(tile=>{
+    const activate=()=>{
+      setVariant(tile.dataset.product);
+      document.getElementById('product').scrollIntoView({behavior:RM?'auto':'smooth'});
+    };
+    tile.addEventListener('click',activate);
+    tile.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate()}});
+  });
+
+  document.getElementById('sizeList').addEventListener('click',event=>{
+    const button=event.target.closest('.size-button');
+    if(!button)return;
+    state.size=button.dataset.size;
+    document.querySelectorAll('.size-button').forEach(item=>{
+      const active=item===button;
+      item.classList.toggle('active',active);
+      item.setAttribute('aria-pressed',String(active));
+    });
+    document.getElementById('sizeError').textContent='';
+    document.getElementById('mobileBuyLabel').textContent='Réserver ma pièce';
+  });
+  const quantityOutput=document.getElementById('quantityOutput');
+  const setQuantity=value=>{
+    state.quantity=Math.min(5,Math.max(1,value));
+    quantityOutput.textContent=state.quantity;
+  };
+  document.getElementById('quantityMinus').addEventListener('click',()=>setQuantity(state.quantity-1));
+  document.getElementById('quantityPlus').addEventListener('click',()=>setQuantity(state.quantity+1));
+
+  const saveCart=()=>{
+    try{localStorage.setItem(cartKey,JSON.stringify(state.cart))}catch(_){}
+  };
+  const cartItems=document.getElementById('cartItems');
+  const cartSubtotal=document.getElementById('cartSubtotal');
+  const cartCount=document.getElementById('cartCount');
+  const renderCart=()=>{
+    const count=state.cart.reduce((sum,item)=>sum+item.quantity,0);
+    cartCount.textContent=count;
+    cartSubtotal.textContent=formatPrice(state.cart.reduce((sum,item)=>sum+item.price*item.quantity,0));
+    if(!state.cart.length){
+      cartItems.innerHTML='<div class="cart-empty"><div><b>Ton signe t’attend.</b><span>Choisis une pièce et une taille pour commencer.</span></div></div>';
+      return;
+    }
+    cartItems.innerHTML=state.cart.map((item,index)=>`
+      <article class="cart-item">
+        <img src="${item.image}" alt="">
+          <div><h3>${item.name}</h3><p>${item.reservation?`Pièce n° ${item.reservation} · `:''}Taille ${item.size}</p>
+          <div class="cart-item-controls"><button type="button" data-cart-action="minus" data-index="${index}" aria-label="Retirer une unité">−</button><span>${item.quantity}</span><button type="button" data-cart-action="plus" data-index="${index}" aria-label="Ajouter une unité">+</button></div>
+          <button class="remove-item" type="button" data-cart-action="remove" data-index="${index}">Retirer</button>
+        </div>
+        <div class="cart-item-price">${formatPrice(item.price*item.quantity)}</div>
+      </article>`).join('');
+  };
+  const openCart=()=>{
+    document.body.classList.add('cart-open');
+    document.getElementById('cartDrawer').setAttribute('aria-hidden','false');
+    document.getElementById('cartClose').focus();
+  };
+  const closeCart=()=>{
+    document.body.classList.remove('cart-open');
+    document.getElementById('cartDrawer').setAttribute('aria-hidden','true');
+    document.getElementById('cartOpen').focus();
+  };
+  document.getElementById('cartOpen').addEventListener('click',openCart);
+  document.getElementById('cartClose').addEventListener('click',closeCart);
+  document.getElementById('cartOverlay').addEventListener('click',closeCart);
+  cartItems.addEventListener('click',event=>{
+    const button=event.target.closest('[data-cart-action]');
+    if(!button)return;
+    const index=Number(button.dataset.index);
+    const item=state.cart[index];
+    if(!item)return;
+    if(button.dataset.cartAction==='plus')item.quantity=Math.min(5,item.quantity+1);
+    if(button.dataset.cartAction==='minus')item.quantity-=1;
+    if(button.dataset.cartAction==='remove'||item.quantity<=0)state.cart.splice(index,1);
+    saveCart();
+    renderCart();
+  });
+
+  const reservationDialog=document.getElementById('reservationDialog');
+  const reservationTitle=document.getElementById('reservationTitle');
+  const reservationSelection=document.getElementById('reservationSelection');
+  const reservationMemory=document.getElementById('reservationMemory');
+  const reservationTimer=document.getElementById('reservationTimer');
+  const ritualKey='aura-lucky-drop-001-number';
+  const ritualExpiryKey='aura-lucky-drop-001-expiry';
+  const reservationDuration=15*60*1000;
+  let reservationInterval;
+  const prepareReservation=()=>{
+    let previousNumber=null;
+    let expiresAt=0;
+    try{
+      previousNumber=localStorage.getItem(ritualKey);
+      expiresAt=Number(localStorage.getItem(ritualExpiryKey))||0;
+    }catch(_){}
+    const number=previousNumber||'12';
+    if(expiresAt<=Date.now())expiresAt=Date.now()+reservationDuration;
+    try{
+      localStorage.setItem(ritualKey,number);
+      localStorage.setItem(ritualExpiryKey,String(expiresAt));
+    }catch(_){}
+    return{number,expiresAt,remembered:Boolean(previousNumber)};
+  };
+  const updateReservationTimer=expiresAt=>{
+    const remaining=Math.max(0,expiresAt-Date.now());
+    const minutes=Math.floor(remaining/60000);
+    const seconds=Math.floor((remaining%60000)/1000);
+    reservationTimer.textContent=`${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+    if(remaining<=0)clearInterval(reservationInterval);
+  };
+  const openReservation=(reservation,product)=>{
+    reservationTitle.innerHTML=`La pièce <em>n° ${reservation.number}</em> t’a choisi.`;
+    reservationSelection.innerHTML=`<span>${product.label}</span><i></i><span>Taille ${state.size}</span><i></i><span>${formatPrice(product.price*state.quantity)}</span>`;
+    reservationMemory.hidden=!reservation.remembered;
+    clearInterval(reservationInterval);
+    updateReservationTimer(reservation.expiresAt);
+    reservationInterval=setInterval(()=>updateReservationTimer(reservation.expiresAt),1000);
+    reservationDialog.showModal();
+    if(RM||!window.gsap){
+      document.getElementById('reservationContinue').focus();
+      return;
+    }
+    const revealTargets=['.reservation-kicker','#reservationTitle','#reservationDescription','#reservationSelection','#reservationMemory','#reservationContinue'];
+    gsap.timeline({onComplete:()=>document.getElementById('reservationContinue').focus()})
+      .set(revealTargets,{opacity:0,y:16,filter:'blur(6px)'})
+      .fromTo('#reservationContent',{opacity:0},{opacity:1,duration:.3,ease:'power2.out'})
+      .fromTo('#reserveCoinAura',{opacity:0,scale:.55},{opacity:1,scale:1,duration:.75,ease:'expo.out'},'<')
+      .fromTo('#reserveCoin',{opacity:0,y:-54,rotationX:-15,rotationY:0},{opacity:1,y:0,rotationX:0,duration:.52,ease:'power3.out'},'<')
+      .to('#reserveCoin',{rotationY:2160,duration:1.5,ease:'power3.inOut'},'-=.1')
+      .fromTo('#reserveCoinGlint',{xPercent:0},{xPercent:520,duration:.7,ease:'power2.inOut'},'-=.92')
+      .to('#reserveCoin',{y:-8,rotationZ:-2,duration:.15,ease:'power2.out'})
+      .to('#reserveCoin',{y:0,rotationZ:0,duration:.38,ease:'bounce.out'})
+      .to(revealTargets,{opacity:1,y:0,filter:'blur(0px)',duration:.55,ease:'power3.out',stagger:.075},'-=.26');
+  };
+  const closeReservation=()=>{
+    clearInterval(reservationInterval);
+    if(reservationDialog.open)reservationDialog.close();
+  };
+  document.getElementById('reservationClose').addEventListener('click',closeReservation);
+  document.getElementById('reservationContinue').addEventListener('click',()=>{
+    closeReservation();
+    openCart();
+  });
+  reservationDialog.addEventListener('click',event=>{if(event.target===reservationDialog)closeReservation()});
+  reservationDialog.addEventListener('cancel',()=>clearInterval(reservationInterval));
+
+  document.getElementById('productForm').addEventListener('submit',event=>{
+    event.preventDefault();
+    if(!state.size){
+      document.getElementById('sizeError').textContent='Choisis une taille avant de réserver la pièce.';
+      document.querySelector('.size-button').focus();
+      return;
+    }
+    const product=products[state.variant];
+    const reservation=prepareReservation();
+    const existing=state.cart.find(item=>item.variant===state.variant&&item.size===state.size);
+    if(existing){
+      existing.quantity=Math.min(5,existing.quantity+state.quantity);
+      existing.reservation=existing.reservation||reservation.number;
+    }else state.cart.push({variant:state.variant,name:product.name,size:state.size,price:product.price,quantity:state.quantity,image:product.image,reservation:reservation.number});
+    saveCart();
+    renderCart();
+    openReservation(reservation,product);
+  });
+  document.getElementById('checkoutButton').addEventListener('click',()=>{
+    showToast(state.cart.length?'Checkout prêt à relier à Shopify.':'Ton panier est vide.');
+  });
+  renderCart();
+
+  const sizeGuide=document.getElementById('sizeGuide');
+  [document.getElementById('sizeGuideHeader'),document.getElementById('sizeGuideProduct'),...document.querySelectorAll('[data-open-size]')].forEach(button=>button.addEventListener('click',()=>sizeGuide.showModal()));
+  sizeGuide.querySelector('[data-close-dialog]').addEventListener('click',()=>sizeGuide.close());
+  sizeGuide.addEventListener('click',event=>{if(event.target===sizeGuide)sizeGuide.close()});
+
+  const lightbox=document.getElementById('lightbox');
+  const lightboxImage=document.getElementById('lightboxImage');
+  const lightboxCaption=document.getElementById('lightboxCaption');
+  let galleryIndex=0,zoom=1,panX=0,panY=0,dragStart=null;
+  const renderLightbox=()=>{
+    const image=gallery[galleryIndex];
+    lightboxImage.src=image.src;
+    lightboxImage.alt=image.alt;
+    lightboxCaption.textContent=`Vue produit ${String(galleryIndex+1).padStart(2,'0')} / ${String(gallery.length).padStart(2,'0')}`;
+    zoom=1;panX=0;panY=0;
+    lightboxImage.style.transform='';
+  };
+  const openLightbox=index=>{galleryIndex=index;renderLightbox();lightbox.showModal()};
+  document.querySelectorAll('[data-lightbox]').forEach(button=>button.addEventListener('click',()=>openLightbox(Number(button.dataset.lightbox))));
+  document.getElementById('lightboxClose').addEventListener('click',()=>lightbox.close());
+  document.getElementById('lightboxPrev').addEventListener('click',()=>{galleryIndex=(galleryIndex-1+gallery.length)%gallery.length;renderLightbox()});
+  document.getElementById('lightboxNext').addEventListener('click',()=>{galleryIndex=(galleryIndex+1)%gallery.length;renderLightbox()});
+  document.getElementById('lightboxReset').addEventListener('click',renderLightbox);
+  const applyZoom=()=>{lightboxImage.style.transform=`translate(${panX}px,${panY}px) scale(${zoom})`};
+  document.getElementById('lightboxMedia').addEventListener('wheel',event=>{event.preventDefault();zoom=Math.min(3,Math.max(1,zoom-event.deltaY*.002));if(zoom===1){panX=0;panY=0}applyZoom()},{passive:false});
+  lightboxImage.addEventListener('dblclick',()=>{zoom=zoom===1?2:1;if(zoom===1){panX=0;panY=0}applyZoom()});
+  lightboxImage.addEventListener('pointerdown',event=>{if(zoom===1)return;lightboxImage.setPointerCapture(event.pointerId);dragStart={x:event.clientX-panX,y:event.clientY-panY}});
+  lightboxImage.addEventListener('pointermove',event=>{if(!dragStart)return;panX=event.clientX-dragStart.x;panY=event.clientY-dragStart.y;applyZoom()});
+  lightboxImage.addEventListener('pointerup',()=>dragStart=null);
+
+  document.getElementById('newsletterForm').addEventListener('submit',event=>{event.preventDefault();showToast('Inscription enregistrée pour la démo.');event.currentTarget.reset()});
+  document.getElementById('skipIntro').addEventListener('click',()=>document.getElementById('home').scrollIntoView({behavior:RM?'auto':'smooth'}));
+  document.getElementById('mobileBuy').addEventListener('click',()=>{
+    if(state.size)document.getElementById('productForm').requestSubmit();
+    else{
+      document.getElementById('sizeError').textContent='Choisis une taille avant de réserver la pièce.';
+      document.getElementById('sizeList').scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});
+    }
+  });
+  const menuButton=document.getElementById('menuButton');
+  const mobileMenu=document.getElementById('mobileMenu');
+  const closeMenu=()=>{
+    document.body.classList.remove('menu-open');
+    menuButton.setAttribute('aria-expanded','false');
+    mobileMenu.setAttribute('aria-hidden','true');
+  };
+  menuButton.setAttribute('aria-expanded','false');
+  menuButton.addEventListener('click',()=>{
+    const open=!document.body.classList.contains('menu-open');
+    document.body.classList.toggle('menu-open',open);
+    menuButton.setAttribute('aria-expanded',String(open));
+    mobileMenu.setAttribute('aria-hidden',String(!open));
+  });
+  mobileMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+  addEventListener('keydown',event=>{if(event.key==='Escape'){if(lightbox.open)lightbox.close();else if(sizeGuide.open)sizeGuide.close();else if(document.body.classList.contains('cart-open'))closeCart();else if(document.body.classList.contains('menu-open'))closeMenu()}});
+
+  if(!RM&&window.gsap&&window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to('#pageProgress',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.25}});
+    gsap.to('#heroModel',{yPercent:7,scale:1.065,ease:'none',scrollTrigger:{trigger:'#home',start:'top top',end:'bottom top',scrub:1}});
+    gsap.fromTo('.hero-copy>*',{opacity:0,y:42},{opacity:1,y:0,duration:1.05,ease:'expo.out',stagger:.09,scrollTrigger:{trigger:'#home',start:'top 74%'}});
+    gsap.fromTo('.hero-visual',{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:1.3,ease:'power4.inOut',scrollTrigger:{trigger:'#home',start:'top 82%'}});
+    document.querySelectorAll('.section-head').forEach(section=>{
+      gsap.fromTo(section.children,{opacity:0,y:44},{opacity:1,y:0,duration:1,ease:'power3.out',stagger:.12,scrollTrigger:{trigger:section,start:'top 84%'}});
+    });
+    document.querySelectorAll('.product-tile').forEach((tile,index)=>{
+      gsap.fromTo(tile,{opacity:0,y:90,rotation:index===1?2:-1},{opacity:1,y:0,rotation:0,duration:1.15,ease:index===1?'power4.out':'expo.out',scrollTrigger:{trigger:tile,start:'top 88%'}});
+    });
+    document.querySelectorAll('.media-frame').forEach((frame,index)=>{
+      gsap.fromTo(frame,{opacity:0,y:46},{opacity:1,y:0,duration:.9,ease:'power3.out',delay:(index%2)*.08,scrollTrigger:{trigger:frame,start:'top 92%'}});
+    });
+    gsap.to('#craftImage',{yPercent:-7,ease:'none',scrollTrigger:{trigger:'.craft',start:'top bottom',end:'bottom top',scrub:1}});
+    gsap.fromTo('.craft-panel>div,.craft-panel>h2,.craft-panel>p',{opacity:0,y:38},{opacity:1,y:0,duration:1,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'.craft-panel',start:'top 72%'}});
+    document.querySelectorAll('.craft-item').forEach((item,index)=>{
+      gsap.fromTo(item,{opacity:0,x:36},{opacity:1,x:0,duration:.75,ease:'power3.out',delay:index*.06,scrollTrigger:{trigger:item,start:'top 92%'}});
+    });
+    document.querySelectorAll('.look-card').forEach((card,index)=>{
+      gsap.fromTo(card,{clipPath:'inset(0 0 100% 0)',y:55},{clipPath:'inset(0 0 0% 0)',y:0,duration:1.15,ease:index%2?'power4.inOut':'expo.inOut',scrollTrigger:{trigger:card,start:'top 88%'}});
+      gsap.to(card.querySelector('img'),{yPercent:-8,ease:'none',scrollTrigger:{trigger:card,start:'top bottom',end:'bottom top',scrub:.8}});
+    });
+    gsap.fromTo('.manifesto-copy p',{opacity:0,yPercent:55,filter:'blur(12px)'},{opacity:1,yPercent:0,filter:'blur(0px)',duration:1.25,ease:'power4.out',stagger:.17,scrollTrigger:{trigger:'.manifesto',start:'top 72%'}});
+    gsap.to('.manifesto-rays',{rotation:38,scale:1.1,ease:'none',scrollTrigger:{trigger:'.manifesto',start:'top bottom',end:'bottom top',scrub:.8}});
+    ScrollTrigger.create({trigger:'#sizeList',start:'top 82%',endTrigger:'#product',end:'bottom 70%',onToggle:self=>document.getElementById('mobileBuy').classList.toggle('show',self.isActive)});
+    if(matchMedia('(pointer:fine)').matches){
+      const heroVisual=document.querySelector('.hero-visual');
+      const moveX=gsap.quickTo('#heroModel','xPercent',{duration:.8,ease:'power3.out'});
+      heroVisual.addEventListener('pointermove',event=>{
+        const bounds=heroVisual.getBoundingClientRect();
+        moveX(((event.clientX-bounds.left)/bounds.width-.5)*2.4);
+      });
+      heroVisual.addEventListener('pointerleave',()=>moveX(0));
+    }
+  }else{
+    document.body.classList.add('entered');
+  }
+})();
+</script>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.181.2/+esm';
+
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const intro=document.getElementById('intro');
+const canvas=document.getElementById('explosionCanvas');
+const saveData=Boolean(navigator.connection&&navigator.connection.saveData);
+if(!reducedMotion&&!saveData&&canvas){
+  try{
+    const lowPower=(navigator.hardwareConcurrency||8)<=4;
+    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!lowPower,powerPreference:'high-performance'});
+    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.toneMapping=THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure=1.12;
+    renderer.setClearColor(0x0A0A0B,0);
+    const scene=new THREE.Scene();
+    const camera=new THREE.OrthographicCamera(-1,1,.5,-.5,-10,10);
+    camera.position.z=3;
+    const random=(()=>{
+      let seed=777;
+      return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}
+    })();
+    const emblemImage=document.querySelector('.intro-emblem img');
+    if(!emblemImage.complete)await emblemImage.decode();
+    const texture=new THREE.Texture(emblemImage);
+    texture.colorSpace=THREE.SRGBColorSpace;
+    texture.minFilter=THREE.LinearFilter;
+    texture.magFilter=THREE.LinearFilter;
+    texture.generateMipmaps=false;
+    texture.needsUpdate=true;
+    const maskCanvas=document.createElement('canvas');
+    maskCanvas.width=Math.min(724,emblemImage.naturalWidth);
+    maskCanvas.height=Math.round(maskCanvas.width*emblemImage.naturalHeight/emblemImage.naturalWidth);
+    const maskContext=maskCanvas.getContext('2d',{willReadFrequently:true});
+    maskContext.drawImage(emblemImage,0,0,maskCanvas.width,maskCanvas.height);
+    const maskImage=maskContext.getImageData(0,0,maskCanvas.width,maskCanvas.height);
+    for(let index=0;index<maskImage.data.length;index+=4){
+      const light=Math.max(maskImage.data[index],maskImage.data[index+1],maskImage.data[index+2]);
+      const mask=Math.round(Math.min(1,Math.max(0,(light-8)/28))*255);
+      maskImage.data[index]=mask;
+      maskImage.data[index+1]=mask;
+      maskImage.data[index+2]=mask;
+      maskImage.data[index+3]=255;
+    }
+    maskContext.putImageData(maskImage,0,0);
+    const maskTexture=new THREE.CanvasTexture(maskCanvas);
+    maskTexture.minFilter=THREE.LinearFilter;
+    maskTexture.magFilter=THREE.LinearFilter;
+    maskTexture.generateMipmaps=false;
+    const fragmentMaterial=new THREE.MeshBasicMaterial({
+      map:texture,alphaMap:maskTexture,color:0xFFFFFF,transparent:true,opacity:1,alphaTest:.025,side:THREE.DoubleSide,depthWrite:false,toneMapped:false
+    });
+    const fragmentGroup=new THREE.Group();
+    scene.add(fragmentGroup);
+    const sampleCanvas=document.createElement('canvas');
+    sampleCanvas.width=362;sampleCanvas.height=272;
+    const sampleContext=sampleCanvas.getContext('2d',{willReadFrequently:true});
+    sampleContext.drawImage(emblemImage,0,0,sampleCanvas.width,sampleCanvas.height);
+    const samplePixels=sampleContext.getImageData(0,0,sampleCanvas.width,sampleCanvas.height).data;
+    const pointInside=(x,y,a,b,c)=>{
+      const denominator=(b.y-c.y)*(a.x-c.x)+(c.x-b.x)*(a.y-c.y);
+      const alpha=((b.y-c.y)*(x-c.x)+(c.x-b.x)*(y-c.y))/denominator;
+      const beta=((c.y-a.y)*(x-c.x)+(a.x-c.x)*(y-c.y))/denominator;
+      const gamma=1-alpha-beta;
+      return alpha>=0&&beta>=0&&gamma>=0;
+    };
+    const hasChrome=points=>{
+      const minX=Math.max(0,Math.floor(Math.min(...points.map(point=>point.x))*sampleCanvas.width));
+      const maxX=Math.min(sampleCanvas.width-1,Math.ceil(Math.max(...points.map(point=>point.x))*sampleCanvas.width));
+      const minY=Math.max(0,Math.floor(Math.min(...points.map(point=>point.y))*sampleCanvas.height));
+      const maxY=Math.min(sampleCanvas.height-1,Math.ceil(Math.max(...points.map(point=>point.y))*sampleCanvas.height));
+      let peak=0,lit=0,total=0;
+      for(let y=minY;y<=maxY;y+=3){
+        for(let x=minX;x<=maxX;x+=3){
+          const u=x/sampleCanvas.width,v=y/sampleCanvas.height;
+          if(!pointInside(u,v,points[0],points[1],points[2]))continue;
+          const index=(y*sampleCanvas.width+x)*4;
+          const light=Math.max(samplePixels[index],samplePixels[index+1],samplePixels[index+2]);
+          peak=Math.max(peak,light);
+          if(light>22)lit++;
+          total++;
+        }
+      }
+      return peak>46||(total>0&&lit/total>.08);
+    };
+    const compactFragments=lowPower||innerWidth<680;
+    const columns=compactFragments?9:15,rows=compactFragments?6:10;
+    const grid=Array.from({length:rows+1},(_,row)=>Array.from({length:columns+1},(_,column)=>{
+      const edge=column===0||column===columns||row===0||row===rows;
+      return{
+        x:column/columns+(edge?0:(random()-.5)*.035),
+        y:row/rows+(edge?0:(random()-.5)*.035)
+      };
+    }));
+    const fragmentBlueprints=[];
+    const registerTriangle=points=>{
+      if(!hasChrome(points))return;
+      const centerX=(points[0].x+points[1].x+points[2].x)/3;
+      const centerY=(points[0].y+points[1].y+points[2].y)/3;
+      const distance=Math.min(1,Math.hypot(centerX-.5,(centerY-.46)*.78)/.58);
+      fragmentBlueprints.push({
+        points,
+        delay:distance*.12+random()*.035,
+        driftX:(random()-.5)*.16,
+        driftY:(random()-.5)*.14,
+        force:.24+random()*.46,
+        depth:random()*2-1,
+        spin:new THREE.Vector3((random()-.5)*3.1,(random()-.5)*3.1,(random()-.5)*4.2)
+      });
+    };
+    for(let row=0;row<rows;row++){
+      for(let column=0;column<columns;column++){
+        const a=grid[row][column],b=grid[row][column+1],c=grid[row+1][column],d=grid[row+1][column+1];
+        if((row+column)%2===0){registerTriangle([a,b,d]);registerTriangle([a,d,c])}
+        else{registerTriangle([a,b,c]);registerTriangle([b,d,c])}
+      }
+    }
+    const fragments=[];
+    const buildFragments=(width,height)=>{
+      fragments.splice(0).forEach(mesh=>mesh.geometry.dispose());
+      fragmentGroup.clear();
+      const aspect=width/height;
+      const mobile=width<680;
+      const displayWidth=mobile?aspect*1.32:Math.min(aspect*.94,1520/height);
+      const displayHeight=displayWidth*.75;
+      const centerY=mobile?.09:.05;
+      fragmentBlueprints.forEach(blueprint=>{
+        const world=blueprint.points.map(point=>new THREE.Vector3(
+          (point.x-.5)*displayWidth,
+          (.5-point.y)*displayHeight+centerY,
+          0
+        ));
+        const center=world.reduce((sum,point)=>sum.add(point),new THREE.Vector3()).multiplyScalar(1/3);
+        const geometry=new THREE.BufferGeometry();
+        geometry.setAttribute('position',new THREE.Float32BufferAttribute(world.flatMap(point=>[point.x-center.x,point.y-center.y,0]),3));
+        geometry.setAttribute('uv',new THREE.Float32BufferAttribute(blueprint.points.flatMap(point=>[point.x,1-point.y]),2));
+        geometry.setIndex([0,1,2]);
+        geometry.computeVertexNormals();
+        const mesh=new THREE.Mesh(geometry,fragmentMaterial);
+        mesh.position.copy(center);
+        const radial=new THREE.Vector2(center.x,center.y-centerY);
+        if(radial.lengthSq()<.001)radial.set((random()-.5)||.1,(random()-.5)||.1);
+        radial.normalize();
+        mesh.userData={
+          start:center.clone(),
+          velocity:new THREE.Vector3(
+            radial.x*blueprint.force+blueprint.driftX,
+            radial.y*blueprint.force+blueprint.driftY,
+            blueprint.depth*1.1
+          ),
+          spin:blueprint.spin,
+          delay:blueprint.delay,
+          depth:blueprint.depth
+        };
+        fragmentGroup.add(mesh);
+        fragments.push(mesh);
+      });
+    };
+
+    const particleCount=lowPower?70:120;
+    const particlePositions=new Float32Array(particleCount*3);
+    const particleStarts=new Float32Array(particleCount*3);
+    const particleVelocities=new Float32Array(particleCount*3);
+    for(let index=0;index<particleCount;index++){
+      const i=index*3;
+      const angle=random()*Math.PI*2;
+      const radius=.04+random()*.42;
+      particleStarts[i]=Math.cos(angle)*radius;
+      particleStarts[i+1]=Math.sin(angle)*radius*.58;
+      particleStarts[i+2]=(random()-.5)*.1;
+      particlePositions.set(particleStarts.slice(i,i+3),i);
+      const force=.12+random()*.55;
+      particleVelocities[i]=Math.cos(angle)*force;
+      particleVelocities[i+1]=Math.sin(angle)*force;
+      particleVelocities[i+2]=(random()-.5)*.4;
+    }
+    const particleGeometry=new THREE.BufferGeometry();
+    particleGeometry.setAttribute('position',new THREE.BufferAttribute(particlePositions,3));
+    const particles=new THREE.Points(particleGeometry,new THREE.PointsMaterial({color:0xE8E6E0,size:1,transparent:true,opacity:0,sizeAttenuation:false,depthWrite:false}));
+    scene.add(particles);
+
+    const clamp=value=>Math.min(1,Math.max(0,value));
+    const smooth=value=>value*value*(3-2*value);
+    let currentProgress=0;
+    let hfOwnsTime=false;
+    const introTimeline=window.gsap?gsap.timeline({paused:true}):null;
+    if(introTimeline){
+      introTimeline
+        .to('.intro-top',{opacity:0,y:-28,duration:.18,ease:'power2.in'},.22)
+        .to('.intro-chapter',{opacity:0,x:-22,duration:.16,ease:'power2.in'},.22)
+        .to('.skip-intro',{opacity:0,pointerEvents:'none',duration:.14,ease:'power2.in'},.28)
+        .fromTo('.intro-message',{opacity:0,y:70},{opacity:1,y:0,duration:.22,ease:'power3.out'},.59)
+        .fromTo('.intro-kicker',{opacity:0,x:-24},{opacity:1,x:0,duration:.18,ease:'power2.out'},.61)
+        .fromTo('.intro-copy h1 span',{clipPath:'inset(0 0 100% 0)',y:45},{clipPath:'inset(0 0 0% 0)',y:0,duration:.24,ease:'power4.out'},.62)
+        .fromTo('.intro-copy h1 em',{clipPath:'inset(0 0 100% 0)',y:52},{clipPath:'inset(0 0 0% 0)',y:0,duration:.24,ease:'power4.out'},.67)
+        .fromTo('.intro-meta',{opacity:0,x:36},{opacity:1,x:0,duration:.18,ease:'power2.out'},.71)
+        .to('#explosionCanvas',{opacity:0,duration:.16,ease:'power1.in'},.84)
+        .to('.intro-copy',{opacity:0,y:-54,filter:'blur(10px)',duration:.16,ease:'power2.in'},.88)
+        .to('.intro-vignette,.intro-aura',{opacity:0,duration:.12,ease:'none'},.91);
+      window.__timelines=window.__timelines||{};
+      window.__timelines['aura-shop-intro']=introTimeline;
+    }
+
+    const renderAt=progress=>{
+      currentProgress=clamp(progress);
+      const approach=smooth(clamp(currentProgress/.34));
+      const blastTime=clamp((currentProgress-.34)/.46);
+      const blast=blastTime*blastTime;
+      const fragmentVisibility=1-smooth(clamp((currentProgress-.84)/.13));
+      fragmentMaterial.opacity=.98*fragmentVisibility;
+      fragmentGroup.scale.setScalar(1+approach*.055);
+      fragments.forEach(mesh=>{
+        const data=mesh.userData;
+        const local=smooth(clamp((blast-data.delay)/(1-data.delay)));
+        mesh.position.set(
+          data.start.x+data.velocity.x*local,
+          data.start.y+data.velocity.y*local-.08*local*local,
+          data.start.z+data.velocity.z*local
+        );
+        mesh.rotation.set(
+          data.spin.x*local,
+          data.spin.y*local,
+          data.spin.z*local
+        );
+        const scale=1+Math.max(0,data.depth)*.32*local-Math.max(0,-data.depth)*.18*local-.035*local*local;
+        mesh.scale.setScalar(scale);
+      });
+      const positions=particleGeometry.attributes.position.array;
+      for(let index=0;index<particleCount;index++){
+        const i=index*3;
+        positions[i]=particleStarts[i]+particleVelocities[i]*blast;
+        positions[i+1]=particleStarts[i+1]+particleVelocities[i+1]*blast-.06*blast*blast;
+        positions[i+2]=particleStarts[i+2]+particleVelocities[i+2]*blast;
+      }
+      particleGeometry.attributes.position.needsUpdate=true;
+      const dustIn=smooth(clamp((currentProgress-.38)/.14));
+      particles.material.opacity=.16*dustIn*fragmentVisibility;
+      if(introTimeline)introTimeline.progress(currentProgress);
+      renderer.render(scene,camera);
+    };
+
+    const resize=()=>{
+      const width=innerWidth,height=innerHeight;
+      const maxDpr=lowPower?1:(width<680?1.2:1.45);
+      renderer.setPixelRatio(Math.min(devicePixelRatio,maxDpr));
+      renderer.setSize(width,height,false);
+      const aspect=width/height;
+      camera.left=-aspect/2;
+      camera.right=aspect/2;
+      camera.top=.5;
+      camera.bottom=-.5;
+      camera.updateProjectionMatrix();
+      buildFragments(width,height);
+      renderAt(currentProgress);
+    };
+    const seekFromScroll=()=>{
+      if(hfOwnsTime)return;
+      const range=Math.max(1,intro.offsetHeight-innerHeight);
+      const progress=clamp(-intro.getBoundingClientRect().top/range);
+      renderAt(progress);
+      document.body.classList.toggle('entered',progress>.84);
+    };
+    addEventListener('scroll',seekFromScroll,{passive:true});
+    addEventListener('resize',resize);
+    window.addEventListener('hf-seek',event=>{
+      hfOwnsTime=true;
+      const progress=clamp((Number(event.detail.time)||0)/3);
+      document.body.classList.toggle('entered',progress>.84);
+      renderAt(progress);
+    });
+    resize();
+    renderAt(0);
+    document.body.classList.add('webgl-ready');
+    window.__hfThreeReady=true;
+  }catch(error){
+    window.__hfThreeError=error instanceof Error?error.stack:String(error);
+    canvas.hidden=true;
+    document.body.classList.add('entered');
+  }
+}else{
+  document.body.classList.add('entered');
+}
+</script>
+</body>
+</html>
