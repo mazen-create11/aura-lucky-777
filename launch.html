@@ -32,7 +32,7 @@ button{font-family:inherit;cursor:pointer}
 /* ---------- header ---------- */
 .hd{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px 28px;mix-blend-mode:normal;opacity:0;transition:opacity .8s ease .2s}
 .hd.on{opacity:1}
-.hd img{height:26px;mix-blend-mode:screen;filter:brightness(1.05)}
+.hd .wordmark{font-weight:600;font-size:13px;letter-spacing:.34em;color:var(--ivoire)}
 .hd .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--pierre)}
 
 /* ---------- intro macro ---------- */
@@ -45,7 +45,7 @@ button{font-family:inherit;cursor:pointer}
 .skip.off{display:none}
 
 /* ---------- hero ---------- */
-.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:96px 24px 64px;position:relative;text-align:center}
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:96px 24px 64px;position:relative;text-align:center;overflow:hidden}
 .rays{position:absolute;top:50%;left:50%;width:150vmin;height:150vmin;transform:translate(-50%,-50%);opacity:.05;pointer-events:none;animation:raySpin 240s linear infinite}
 @keyframes raySpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .halo{position:absolute;top:38%;left:50%;width:80vmin;height:80vmin;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(201,162,39,.14),transparent 62%);pointer-events:none}
@@ -97,13 +97,13 @@ section{padding:clamp(80px,14vh,150px) 24px;max-width:980px;margin:0 auto;text-a
 
 /* ---------- footer ---------- */
 footer{padding:60px 24px 44px;text-align:center;border-top:1px solid rgba(242,239,230,.07)}
-footer img{height:30px;margin:0 auto 18px;mix-blend-mode:screen}
+footer img{height:56px;margin:0 auto 18px;mix-blend-mode:screen}
 footer a{color:var(--pierre);font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-decoration:none;padding:12px;display:inline-block}
 footer a:hover{color:var(--or)}
 footer small{display:block;margin-top:14px;color:rgba(138,133,120,.5);font-size:11px}
 
 /* ---------- rituel ---------- */
-.rituel{position:fixed;inset:0;z-index:80;display:none;place-items:center;background:rgba(10,10,11,.93);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.rituel{position:fixed;inset:0;z-index:80;display:none;place-items:center;background:rgba(10,10,11,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .rituel.open{display:grid}
 .rituel .box{text-align:center;padding:24px;max-width:460px;width:100%}
 .rituel .close{position:absolute;top:18px;right:18px;background:none;border:none;color:var(--pierre);font-size:26px;line-height:1;padding:12px;min-width:44px;min-height:44px}
@@ -146,7 +146,7 @@ footer small{display:block;margin-top:14px;color:rgba(138,133,120,.5);font-size:
 <body>
 
 <header class="hd" id="hd">
-  <img src="assets/launch/signature.jpg" alt="Aura Lucky">
+  <span class="wordmark">AURA LUCKY</span>
   <span class="tag">DROP 001</span>
 </header>
 
@@ -222,7 +222,7 @@ footer small{display:block;margin-top:14px;color:rgba(138,133,120,.5);font-size:
 </main>
 
 <footer>
-  <img src="assets/launch/signature.jpg" alt="Aura Lucky">
+  <img src="assets/launch/signature-crop.jpg" alt="Aura Lucky">
   <a href="https://www.instagram.com/aura_lucky777" target="_blank" rel="noopener">@aura_lucky777</a>
   <small>Aura Lucky 777 — Drop 001 · page de lancement (démo)</small>
 </footer>
