@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Lucky — Pièce réservée</title>
+<!--
+  TEMPLATE EMAIL — confirmation de réservation Drop 001
+  Variables serveur : {{numero}} {{prenom}} {{email}} {{date_drop}}
+  Envoi réel à câbler : worker Cloudflare (POST du formulaire) → Resend/Brevo avec ce template.
+  Le script en bas de page ne sert qu'à la PRÉVISUALISATION navigateur (?n=&p=&e=) — il est ignoré par les clients mail.
+-->
+</head>
+<body style="margin:0;padding:0;background-color:#0A0A0B;">
+<div style="display:none;max-height:0;overflow:hidden;">Ta pièce n°{{numero}} est réservée. Le lien de paiement suivra à l'ouverture du drop.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0A0A0B;">
+  <tr><td align="center" style="padding:44px 16px;">
+    <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
+
+      <tr><td align="center" style="padding-bottom:30px;">
+        <span style="font-family:'Space Grotesk',Menlo,monospace;font-size:11px;letter-spacing:4px;color:#8A8578;text-transform:uppercase;">Aura Lucky 777 · Drop 001</span>
+      </td></tr>
+
+      <tr><td align="center" style="padding-bottom:34px;">
+        <img src="https://mazen-create11.github.io/aura-lucky-777/assets/launch/coin-email.png" width="190" height="190" alt="Pièce d'or 777" style="display:block;border-radius:50%;">
+      </td></tr>
+
+      <tr><td align="center" style="padding-bottom:10px;">
+        <h1 style="margin:0;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:32px;line-height:1.2;color:#F2EFE6;">Pièce n°{{numero}} — réservée.</h1>
+      </td></tr>
+
+      <tr><td align="center" style="padding:0 28px 30px;">
+        <p style="margin:0;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;color:#8A8578;">
+          {{prenom}}, ta pièce porte désormais ton nom.<br>
+          Le Drop 001 ouvre le <span style="color:#C9A227;">{{date_drop}}</span>. Ton lien de paiement arrivera dans cette boîte, avant tout le monde. Réserver ne t'engage à rien — mais personne d'autre ne pourra prendre la n°{{numero}}.
+        </p>
+      </td></tr>
+
+      <tr><td align="center" style="padding-bottom:38px;">
+        <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+          <td style="background-color:#C9A227;">
+            <a href="https://mazen-create11.github.io/aura-lucky-777/launch.html" style="display:inline-block;padding:15px 36px;font-family:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#0A0A0B;text-decoration:none;">Revoir le drop</a>
+          </td>
+        </tr></table>
+      </td></tr>
+
+      <tr><td align="center" style="padding:26px 28px 0;border-top:1px solid #23231f;">
+        <p style="margin:0 0 6px;font-family:Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#8A8578;">
+          20 exemplaires numérotés. Jamais réédités.
+        </p>
+        <p style="margin:0;font-family:Helvetica,Arial,sans-serif;font-size:11px;line-height:1.6;color:#55534b;">
+          Tu reçois cet email parce que tu as réservé une pièce du Drop 001 avec l'adresse {{email}}.<br>
+          <a href="#" style="color:#55534b;">Annuler ma réservation</a> · <a href="https://www.instagram.com/aura_lucky777" style="color:#55534b;">@aura_lucky777</a>
+        </p>
+      </td></tr>
+
+    </table>
+  </td></tr>
+</table>
+<script>
+/* prévisualisation navigateur uniquement — remplace les variables depuis l'URL (?n=7&p=Sam&e=x@y.fr) */
+(function(){
+  var q = new URLSearchParams(location.search);
+  var map = {
+    '{{numero}}': q.get('n') || '7',
+    '{{prenom}}': q.get('p') || 'Toi',
+    '{{email}}': q.get('e') || 'ton@email.fr',
+    '{{date_drop}}': '7 août 2026 — 19 h'
+  };
+  document.body.innerHTML = document.body.innerHTML.replace(/{{numero}}|{{prenom}}|{{email}}|{{date_drop}}/g, function(m){ return map[m]; });
+})();
+</script>
+</body>
+</html>

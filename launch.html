@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Lucky — Drop 001, bientôt</title>
+<meta name="description" content="Drop 001 — 20 pièces numérotées, jamais rééditées. Réserve la tienne avant l'ouverture.">
+<meta property="og:title" content="Aura Lucky — Drop 001, bientôt">
+<meta property="og:description" content="20 pièces numérotées. Jamais rééditées. Réserve la tienne.">
+<meta property="og:image" content="https://mazen-create11.github.io/aura-lucky-777/assets/launch/coin-og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230A0A0B'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='24' fill='%23C9A227'%3E777%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#0A0A0B; --surface:#101012; --ivoire:#F2EFE6;
+  --or:#C9A227; --or-clair:#E4C55B; --or-sombre:#6E5A13; --pierre:#8A8578;
+  --serif:'Instrument Serif',serif; --ui:'Switzer',sans-serif; --mono:'Space Grotesk',monospace;
+  --coin:min(26vmin,240px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--noir);color:var(--ivoire);font-family:var(--ui);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+
+/* ---------- header ---------- */
+.hd{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px 28px;mix-blend-mode:normal;opacity:0;transition:opacity .8s ease .2s}
+.hd.on{opacity:1}
+.hd img{height:26px;mix-blend-mode:screen;filter:brightness(1.05)}
+.hd .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--pierre)}
+
+/* ---------- intro macro ---------- */
+.macro{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:var(--noir);pointer-events:none}
+.macro img{width:var(--coin);height:var(--coin);border-radius:50%;transform:scale(26);transform-origin:52% 44%;filter:blur(12px) brightness(1.12);will-change:transform,filter}
+.macro.done{display:none}
+.skip{position:fixed;top:20px;right:24px;z-index:70;background:none;border:none;color:var(--pierre);font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:12px;min-height:44px;opacity:.7}
+.skip:hover{color:var(--ivoire)}
+.skip:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+.skip.off{display:none}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:96px 24px 64px;position:relative;text-align:center}
+.rays{position:absolute;top:50%;left:50%;width:150vmin;height:150vmin;transform:translate(-50%,-50%);opacity:.05;pointer-events:none;animation:raySpin 240s linear infinite}
+@keyframes raySpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.halo{position:absolute;top:38%;left:50%;width:80vmin;height:80vmin;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(201,162,39,.14),transparent 62%);pointer-events:none}
+
+.scene{perspective:1100px;width:var(--coin);height:var(--coin);position:relative;opacity:0}
+.scene.on{opacity:1}
+.coin3d{position:absolute;inset:0;transform-style:preserve-3d;animation:coinSpin 7.5s linear infinite;animation-play-state:paused}
+.scene.on .coin3d{animation-play-state:running}
+@keyframes coinSpin{to{transform:rotateY(360deg)}}
+.coin3d .f{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;background-size:cover;background-position:center}
+.coin3d .front{background-image:url('assets/launch/coin-pile-777.webp');transform:translateZ(5px)}
+.coin3d .back{background-image:url('assets/launch/coin-face-aura.webp');transform:rotateY(180deg) translateZ(5px)}
+.coin3d .edge{position:absolute;top:50%;left:50%;height:10px;background:linear-gradient(90deg,var(--or-sombre),var(--or) 50%,var(--or-sombre))}
+
+.phrase{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2rem,5.6vw,4.1rem);line-height:1.14;max-width:15ch}
+.phrase .w{display:inline-block}
+.subtag{font-family:var(--mono);font-size:12px;letter-spacing:.26em;color:var(--pierre);text-transform:uppercase}
+
+.count{display:flex;gap:clamp(18px,4vw,38px);font-family:var(--mono)}
+.count div{display:flex;flex-direction:column;align-items:center;gap:6px}
+.count b{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:500;color:var(--or);font-variant-numeric:tabular-nums}
+.count span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--pierre)}
+
+.ticks{display:flex;gap:6px;align-items:flex-end}
+.ticks i{width:2px;height:14px;background:var(--or);opacity:.85;transition:opacity .5s}
+.ticks i.gone{opacity:.18}
+.ticks-label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--pierre);text-transform:uppercase;margin-top:10px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:15px 36px;background:transparent;border:1px solid var(--or);color:var(--ivoire);font-family:var(--ui);font-weight:500;font-size:14px;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s;text-decoration:none}
+.btn:hover{background:var(--or);color:var(--noir)}
+.btn:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+.btn-gold{background:var(--or);color:var(--noir)}
+.btn-gold:hover{background:var(--or-clair)}
+
+.pre{opacity:0;transform:translateY(22px)}
+
+/* ---------- sections ---------- */
+section{padding:clamp(80px,14vh,150px) 24px;max-width:980px;margin:0 auto;text-align:center}
+.manif p{font-family:var(--serif);font-size:clamp(1.5rem,3.6vw,2.5rem);line-height:1.35;color:var(--ivoire)}
+.manif p+p{margin-top:.6em}
+.manif em{font-style:italic;color:var(--or)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:44px;text-align:left}
+.card{background:var(--surface);border:1px solid rgba(201,162,39,.16);padding:28px 26px}
+.card h3{font-family:var(--ui);font-weight:600;font-size:15px;letter-spacing:.06em;margin-bottom:10px}
+.card h3 b{color:var(--or);font-family:var(--mono);font-weight:500;margin-right:8px}
+.card p{color:var(--pierre);font-size:14.5px;line-height:1.65}
+.h2{font-family:var(--serif);font-style:italic;font-size:clamp(1.8rem,4.4vw,3rem);margin-bottom:8px}
+.h2 + .subtag{display:block;margin-bottom:6px}
+
+/* ---------- footer ---------- */
+footer{padding:60px 24px 44px;text-align:center;border-top:1px solid rgba(242,239,230,.07)}
+footer img{height:30px;margin:0 auto 18px;mix-blend-mode:screen}
+footer a{color:var(--pierre);font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-decoration:none;padding:12px;display:inline-block}
+footer a:hover{color:var(--or)}
+footer small{display:block;margin-top:14px;color:rgba(138,133,120,.5);font-size:11px}
+
+/* ---------- rituel ---------- */
+.rituel{position:fixed;inset:0;z-index:80;display:none;place-items:center;background:rgba(10,10,11,.93);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.rituel.open{display:grid}
+.rituel .box{text-align:center;padding:24px;max-width:460px;width:100%}
+.rituel .close{position:absolute;top:18px;right:18px;background:none;border:none;color:var(--pierre);font-size:26px;line-height:1;padding:12px;min-width:44px;min-height:44px}
+.rituel .close:hover{color:var(--ivoire)}
+.rituel .close:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+.rscene{perspective:1000px;width:min(52vmin,250px);height:min(52vmin,250px);margin:0 auto 30px;position:relative}
+.rcoin{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.rcoin .f{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;background-size:cover;background-position:center}
+.rcoin .front{background-image:url('assets/launch/coin-pile-777.webp');transform:translateZ(5px)}
+.rcoin .back{background-image:url('assets/launch/coin-face-aura.webp');transform:rotateY(180deg) translateZ(5px)}
+.flare{position:absolute;inset:-30%;border-radius:50%;background:radial-gradient(circle,rgba(228,197,91,.5),transparent 60%);opacity:0;pointer-events:none}
+.rtitle{font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.2;min-height:2.5em}
+.rsub{color:var(--pierre);font-size:14.5px;line-height:1.6;margin-top:10px}
+.rform{display:none;flex-direction:column;gap:12px;margin-top:26px}
+.rform.on{display:flex}
+.rform input{background:var(--surface);border:1px solid rgba(242,239,230,.14);color:var(--ivoire);padding:14px 16px;font-family:var(--ui);font-size:15px;min-height:48px}
+.rform input:focus-visible{outline:2px solid var(--or);outline-offset:2px;border-color:var(--or)}
+.rform input::placeholder{color:var(--pierre)}
+.rconfirm{display:none;margin-top:26px}
+.rconfirm.on{display:block}
+.rconfirm .mail-demo{display:inline-block;margin-top:18px;color:var(--pierre);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-decoration:underline;text-underline-offset:4px;padding:10px}
+.rconfirm .mail-demo:hover{color:var(--or)}
+
+/* ---------- grain ---------- */
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+
+@media (prefers-reduced-motion:reduce){
+  .rays,.coin3d{animation:none}
+  .pre{opacity:1;transform:none}
+  .macro{display:none}
+  .scene{opacity:1}
+  .hd{opacity:1}
+}
+@media (max-width:640px){
+  .hd{padding:16px 18px}
+  section{padding:70px 20px}
+}
+</style>
+</head>
+<body>
+
+<header class="hd" id="hd">
+  <img src="assets/launch/signature.jpg" alt="Aura Lucky">
+  <span class="tag">DROP 001</span>
+</header>
+
+<div class="macro" id="macro" aria-hidden="true">
+  <img src="assets/launch/coin-pile-777.webp" alt="">
+</div>
+<button class="skip" id="skip" type="button">Passer</button>
+
+<main>
+  <div class="hero">
+    <svg class="rays" viewBox="0 0 100 100" aria-hidden="true">
+      <g stroke="#C9A227" stroke-width=".14">
+        <!-- rayons générés en JS -->
+      </g>
+    </svg>
+    <div class="halo" aria-hidden="true"></div>
+
+    <div class="scene" id="scene" aria-label="Pièce d'or Aura Lucky 777">
+      <div class="coin3d" id="coin3d">
+        <div class="f front"></div>
+        <div class="f back"></div>
+      </div>
+    </div>
+
+    <h1 class="phrase pre" id="phrase">La première pièce tombe bientôt.</h1>
+    <p class="subtag pre">Drop 001 — 20 exemplaires numérotés</p>
+
+    <div class="count pre" id="count" aria-label="Compte à rebours avant le drop">
+      <div><b id="cdJ">—</b><span>jours</span></div>
+      <div><b id="cdH">—</b><span>heures</span></div>
+      <div><b id="cdM">—</b><span>minutes</span></div>
+      <div><b id="cdS">—</b><span>secondes</span></div>
+    </div>
+
+    <div class="pre">
+      <div class="ticks" id="ticks" aria-hidden="true"></div>
+      <p class="ticks-label" id="ticksLabel">20 pièces — aucune de plus</p>
+    </div>
+
+    <button class="btn btn-gold pre" id="ctaReserve" type="button">Réserver ma pièce</button>
+  </div>
+
+  <section class="manif" id="manif">
+    <p class="pre">Une seule pièce. <em>Vingt</em> exemplaires.</p>
+    <p class="pre">Chacun porte son numéro, frappé une fois.</p>
+    <p class="pre">Quand c'est parti, c'est parti.</p>
+  </section>
+
+  <section>
+    <span class="subtag pre">Réserver, concrètement</span>
+    <h2 class="h2 pre">Ta pièce t'attend déjà.</h2>
+    <div class="grid">
+      <div class="card pre">
+        <h3><b>01</b>Tire ton numéro</h3>
+        <p>La pièce tourne, ton numéro tombe. Il est à toi, personne d'autre ne l'aura.</p>
+      </div>
+      <div class="card pre">
+        <h3><b>02</b>Réserve sans payer</h3>
+        <p>Ton email suffit. La réservation ne coûte rien et le prix du drop ne bougera pas.</p>
+      </div>
+      <div class="card pre">
+        <h3><b>03</b>Paie à l'ouverture</h3>
+        <p>Le jour du drop, tu reçois ton lien de paiement en premier. Ta pièce part avec toi, pas en file d'attente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="h2 pre">20 chances. Pas une de plus.</h2>
+    <p class="rsub pre" style="max-width:44ch;margin:10px auto 30px">Ensemble noir brodé main — longsleeve 777, short ou jogging signés. Aucune réédition, jamais.</p>
+    <button class="btn pre" id="ctaReserve2" type="button">Réserver ma pièce</button>
+  </section>
+</main>
+
+<footer>
+  <img src="assets/launch/signature.jpg" alt="Aura Lucky">
+  <a href="https://www.instagram.com/aura_lucky777" target="_blank" rel="noopener">@aura_lucky777</a>
+  <small>Aura Lucky 777 — Drop 001 · page de lancement (démo)</small>
+</footer>
+
+<div class="rituel" id="rituel" role="dialog" aria-modal="true" aria-labelledby="rtitle">
+  <button class="close" id="rclose" type="button" aria-label="Fermer">×</button>
+  <div class="box">
+    <div class="rscene">
+      <div class="rcoin" id="rcoin">
+        <div class="f front"></div>
+        <div class="f back"></div>
+      </div>
+      <div class="flare" id="flare"></div>
+    </div>
+    <h2 class="rtitle" id="rtitle"></h2>
+    <p class="rsub" id="rsub"></p>
+
+    <form class="rform" id="rform" novalidate>
+      <input type="text" name="prenom" id="fPrenom" placeholder="Ton prénom (optionnel)" autocomplete="given-name">
+      <input type="email" name="email" id="fEmail" placeholder="Ton email" autocomplete="email" required>
+      <button class="btn btn-gold" type="submit">C'est la mienne</button>
+    </form>
+
+    <div class="rconfirm" id="rconfirm">
+      <button class="btn" id="rok" type="button">C'est noté</button><br>
+      <a class="mail-demo" href="emails/confirmation-reservation.html" target="_blank" rel="noopener" id="mailPreview">Aperçu de l'email envoyé (démo) →</a>
+    </div>
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script>
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TOTAL = 20;
+const DROP_DATE = new Date('2026-08-07T19:00:00+02:00'); // ⚠️ placeholder — date à confirmer avec le client
+const LS_KEY = 'al777_resa';
+const $ = id => document.getElementById(id);
+
+/* rayons du hero (écho du badge) */
+(() => {
+  const g = document.querySelector('.rays g');
+  let h = '';
+  for (let i = 0; i < 48; i++) {
+    const a = (i / 48) * Math.PI * 2;
+    const r1 = 14 + (i % 3) * 4, r2 = 46;
+    h += `<line x1="${50 + Math.cos(a) * r1}" y1="${50 + Math.sin(a) * r1}" x2="${50 + Math.cos(a) * r2}" y2="${50 + Math.sin(a) * r2}"/>`;
+  }
+  g.innerHTML = h;
+})();
+
+/* tranche des pièces (24 segments) */
+function buildEdge(host, size) {
+  const r = size / 2, n = 24, w = 2 * Math.PI * r / n + 1;
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement('div');
+    s.className = 'edge';
+    s.style.cssText = `width:${w}px;margin:-5px 0 0 ${-w / 2}px;transform:rotateZ(${i * (360 / n)}deg) translateY(${-r}px) rotateX(90deg)`;
+    host.appendChild(s);
+  }
+}
+const coinSize = Math.min(innerWidth, innerHeight) * .26 > 240 ? 240 : Math.min(innerWidth, innerHeight) * .26;
+buildEdge($('coin3d'), coinSize);
+buildEdge($('rcoin'), Math.min(innerWidth, innerHeight) * .52 > 250 ? 250 : Math.min(innerWidth, innerHeight) * .52);
+
+/* réservation persistée */
+let resa = null;
+try { resa = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch (e) {}
+
+/* compteur de pièces */
+const ticks = $('ticks');
+for (let i = 0; i < TOTAL; i++) ticks.appendChild(document.createElement('i'));
+function renderTicks() {
+  const left = TOTAL - (resa ? 1 : 0);
+  [...ticks.children].forEach((t, i) => t.classList.toggle('gone', i >= left));
+  $('ticksLabel').textContent = resa
+    ? `${left} pièces encore libres — la n°${resa.n} est à toi`
+    : `${TOTAL} pièces — aucune de plus`;
+  if (resa) {
+    $('ctaReserve').textContent = `Ma pièce n°${resa.n}`;
+    $('ctaReserve2').textContent = `Ma pièce n°${resa.n}`;
+  }
+}
+renderTicks();
+
+/* compte à rebours */
+function pad(x) { return String(x).padStart(2, '0'); }
+function tick() {
+  const d = DROP_DATE - Date.now();
+  if (d <= 0) {
+    $('cdJ').textContent = '00'; $('cdH').textContent = '00';
+    $('cdM').textContent = '00'; $('cdS').textContent = '00';
+    $('phrase').textContent = 'Le drop est ouvert.';
+    return;
+  }
+  $('cdJ').textContent = pad(Math.floor(d / 864e5));
+  $('cdH').textContent = pad(Math.floor(d / 36e5) % 24);
+  $('cdM').textContent = pad(Math.floor(d / 6e4) % 60);
+  $('cdS').textContent = pad(Math.floor(d / 1e3) % 60);
+  setTimeout(tick, 1000);
+}
+tick();
+
+/* intro dézoom */
+const macro = $('macro'), skip = $('skip');
+let introDone = false;
+function endIntro(instant) {
+  if (introDone) return;
+  introDone = true;
+  gsap.killTweensOf(macro.querySelector('img'));
+  macro.classList.add('done');
+  skip.classList.add('off');
+  $('hd').classList.add('on');
+  $('scene').classList.add('on');
+  document.body.style.overflow = '';
+  const els = document.querySelectorAll('.hero .pre');
+  if (RM || instant === true) {
+    document.querySelectorAll('.pre').forEach(e => { e.style.opacity = 1; e.style.transform = 'none'; });
+  } else {
+    gsap.to(els, { opacity: 1, y: 0, duration: .9, stagger: .09, ease: 'power3.out', clearProps: 'transform' });
+  }
+}
+if (RM) {
+  endIntro(true);
+} else {
+  document.body.style.overflow = 'hidden';
+  const isMobile = innerWidth < 640;
+  gsap.to(macro.querySelector('img'), {
+    scale: 1, filter: 'blur(0px) brightness(1)',
+    duration: isMobile ? 2.1 : 2.9, ease: 'power2.inOut', delay: .25,
+    onComplete: () => {
+      gsap.to(macro, { opacity: 0, duration: .45, onComplete: () => endIntro() });
+    }
+  });
+}
+skip.addEventListener('click', () => { gsap.set(macro, { opacity: 0 }); endIntro(); });
+
+/* reveals au scroll */
+if (!RM) {
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll('section .pre').forEach(el => {
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: .9, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 86%' }
+    });
+  });
+} else {
+  document.querySelectorAll('section .pre').forEach(e => { e.style.opacity = 1; e.style.transform = 'none'; });
+}
+
+/* ---------- rituel ---------- */
+const rituel = $('rituel'), rcoin = $('rcoin'), rtitle = $('rtitle'), rsub = $('rsub');
+const rform = $('rform'), rconfirm = $('rconfirm'), flare = $('flare');
+let lastFocus = null;
+
+function openRituel() {
+  lastFocus = document.activeElement;
+  rituel.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  rform.classList.remove('on');
+  rconfirm.classList.remove('on');
+  if (resa) { showConfirm(true); return; }
+  const n = 1 + Math.floor(Math.random() * TOTAL);
+  rituel.dataset.n = n;
+  rtitle.textContent = '';
+  rsub.textContent = '';
+  if (RM) { landed(n); return; }
+  gsap.set(rcoin, { rotationY: 0 });
+  gsap.to(rcoin, {
+    rotationY: 1800, duration: 2.5, ease: 'power4.inOut',
+    onComplete: () => {
+      gsap.fromTo(flare, { opacity: 0 }, { opacity: 1, duration: .12, yoyo: true, repeat: 1 });
+      gsap.fromTo(rcoin, { scale: 1 }, { scale: 1.06, duration: .14, yoyo: true, repeat: 1, ease: 'power2.out' });
+      landed(n);
+    }
+  });
+}
+function landed(n) {
+  rtitle.textContent = `La pièce n°${n} t'a choisi.`;
+  rsub.textContent = 'Réserve-la à ton nom. Gratuit — tu paies seulement à l\'ouverture du drop.';
+  rform.classList.add('on');
+  $('fEmail').focus();
+}
+function showConfirm(existing) {
+  rtitle.textContent = `Pièce n°${resa.n} — réservée${resa.prenom ? ' pour ' + resa.prenom : ''}.`;
+  rsub.textContent = existing
+    ? 'Elle t\'attend. Le lien de paiement partira sur ' + resa.email + ' à l\'ouverture du drop.'
+    : 'Confirmation envoyée à ' + resa.email + '. Le lien de paiement suivra à l\'ouverture du drop.';
+  rform.classList.remove('on');
+  rconfirm.classList.add('on');
+  $('mailPreview').href = 'emails/confirmation-reservation.html?n=' + resa.n
+    + '&p=' + encodeURIComponent(resa.prenom || '') + '&e=' + encodeURIComponent(resa.email);
+}
+function closeRituel() {
+  rituel.classList.remove('open');
+  document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
+}
+$('ctaReserve').addEventListener('click', openRituel);
+$('ctaReserve2').addEventListener('click', openRituel);
+$('rclose').addEventListener('click', closeRituel);
+$('rok').addEventListener('click', closeRituel);
+rituel.addEventListener('click', e => { if (e.target === rituel) closeRituel(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && rituel.classList.contains('open')) closeRituel(); });
+
+rform.addEventListener('submit', e => {
+  e.preventDefault();
+  const email = $('fEmail').value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('fEmail').focus(); $('fEmail').style.borderColor = '#b3452f'; return; }
+  resa = { n: Number(rituel.dataset.n), email, prenom: $('fPrenom').value.trim(), t: Date.now() };
+  try { localStorage.setItem(LS_KEY, JSON.stringify(resa)); } catch (err) {}
+  /* branchement réel : POST vers le worker de réservation (Cloudflare) qui déclenche l'email — à câbler */
+  renderTicks();
+  showConfirm(false);
+});
+</script>
+</body>
+</html>
